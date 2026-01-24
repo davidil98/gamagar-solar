@@ -6,29 +6,6 @@ Este repositorio contiene el código fuente del sitio web oficial de **GamaGar S
 
 ---
 
-## 🛠️ Servicios Especializados
-
-El sitio web destaca los tres pilares fundamentales de la empresa:
-
-* **Sistemas Fotovoltaicos:** Diseño e instalación de paneles solares en baja y media tensión (Sistemas Interconectados, Autónomos e Híbridos).
-* **Integración de Baterías:** Sistemas de almacenamiento de energía para respaldo crítico y gestión inteligente de demanda.
-* **Estaciones de Carga EV:** Instalación profesional de infraestructura de carga para vehículos eléctricos (Tesla, BYD y otras marcas líderes).
-
----
-
-## 🚀 Tecnologías Utilizadas
-
-* **Backend:** [Flask](https://flask.palletsprojects.com/) (Python) como motor de plantillas y rutas.
-* **Frontend:** Plantilla **Spectral** de [HTML5 UP](https://html5up.net/), personalizada y adaptada.
-* **Generador Estático:** [Frozen-Flask](https://frozen-flask.readthedocs.io/) para despliegue optimizado en GitHub Pages.
-* **Diseño:** HTML5, CSS3 (Sass) y JavaScript.
-* **Tipografía:** Ubuntu (vía Google Fonts) para una estética técnica y moderna.
-* **Formulario:** Integración con [Formspree](https://formspree.io/) para la recepción de solicitudes de valoración técnica.
-
----
-
-## 📁 Estructura del Proyecto
-
 # GamaGar Solar ☀️🔋⚡
 
 **Ingeniería en Energía Fotovoltaica y Movilidad Eléctrica**
@@ -68,22 +45,4 @@ El sitio web destaca los tres pilares fundamentales de la empresa:
 │   ├── css/            # Estilos personalizados de Spectral
 │   ├── img/            # Galería de proyectos y servicios
     └── js/             # Scripts de interactividad y animaciones
-```
-
-## ⚙️ Configuración y Despliegue Local
-Si deseas clonar y ejecutar el proyecto en tu entorno local:
-
-1. Clonar el repositorio:
-```bash
-git clone https://github.com/tu-usuario/gamagar-solar.git
-```
-
-2. Instalar dependencias:
-```bash
-pip install -r requirements.txt
-```
-
-3. Ejecutar la aplicación:
-```bash
-python app.py
 ```
