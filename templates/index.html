@@ -1,0 +1,200 @@
+<!DOCTYPE HTML>
+<!--
+	Spectral by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>{{ content.header.title }}</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+	<noscript>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" />
+	</noscript>
+</head>
+
+<body class="landing is-preload">
+
+	<!-- Page Wrapper -->
+	<div id="page-wrapper">
+
+		<!-- Header -->
+		<header id="header" class="alt">
+			<h1><a href="{{ url_for('index') }}">{{ content.header.title }}</a></h1>
+			<nav id="nav">
+				<ul>
+					<li class="special">
+						<a href="#menu" class="menuToggle"><span>{{ content.header.menu }}</span></a>
+						<div id="menu">
+							<ul>
+								{% for link in content.header.links %}
+								<li><a href="{{ link.url }}">{{ link.text }}</a></li>
+								{% endfor %}
+							</ul>
+						</div>
+					</li>
+				</ul>
+			</nav>
+		</header>
+
+		<!-- Banner -->
+		<section id="banner">
+			<div class="inner">
+				<h2>{{ content.banner.title }}</h2>
+				<p>{{ content.banner.description | safe }}</p>
+				<ul class="actions special">
+					<li><a href="{{ content.banner.button_url }}" class="button primary smooth-scroll">{{
+							content.banner.button }}</a></li>
+				</ul>
+			</div>
+			<a href="#one" class="more scrolly"></a>
+		</section>
+
+		<!-- One -->
+		<section id="one" class="wrapper style1 special">
+			<div class="inner">
+				<header class="major">
+					<h2>{{ content.intro.title }}</h2>
+					<p>{{ content.intro.description }}</p>
+				</header>
+				<ul class="icons major">
+					{% for feature in content.intro.features %}
+					<li><span class="icon solid {{ feature.icon }} major style{{ loop.index }}"><span class="label">{{
+								feature.label }}</span></span></li>
+					{% endfor %}
+				</ul>
+			</div>
+		</section>
+
+		<!-- Two -->
+		<section id="two" class="wrapper alt style2">
+			{% for service in content.services %}
+			<section class="spotlight">
+				{% if loop.first %}
+				<div class="image">
+					<video width="100%" height="auto" autoplay loop muted>
+						<source src="{{ url_for('static', filename='images/' + service.video) }}" type="video/mp4">
+					</video>
+				</div>
+				{% else %}
+				<div class="image" style="object-fit: fill;"><img
+						src="{{ url_for('static', filename='images/' + service.image) }}" alt="{{ service.title }}" />
+				</div>
+				{% endif %}
+				<div class="content">
+					<h2>{{ service.title }}</h2>
+					<p>{{ service.description }}</p>
+				</div>
+			</section>
+			{% endfor %}
+		</section>
+
+		<!-- Three -->
+		<section id="three" class="wrapper style3 special">
+			<div class="inner">
+				<header class="major">
+					<h2>{{ content.features_list.title }}</h2>
+					<p>{{ content.features_list.description }}</p>
+				</header>
+				<ul class="features">
+					{% for item in content.features_list.reasons %}
+					<li class="icon solid {{ item.icon }}">
+						<h3>{{ item.title }}</h3>
+						<p>{{ item.description }}</p>
+					</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</section>
+
+		<!-- Founder -->
+		<section id="founder" class="wrapper style5 special">
+			<div class="inner">
+				<header class="major">
+					<h2>{{ content.founder.title }}</h2>
+					<p>{{ content.founder.description }}</p>
+				</header>
+				<span class="image main"><img src="{{ url_for('static', filename='images/' + content.founder.image) }}"
+						alt="{{ content.founder.title }}"
+						style="max-width: 400px; border-radius: 50%; margin: 0 auto; display: block;" /></span>
+			</div>
+		</section>
+
+		<!-- CTA -->
+		<section id="cta" class="wrapper style4">
+			<div class="inner">
+				<header style="padding-left: 5%;">
+					<h2>{{ content.cta.title }}</h2>
+					<p>{{ content.cta.description }}</p>
+				</header>
+				<form method="post" action="https://formspree.io/f/YOUR_FORM_ID">
+					<div class="row gtr-uniform">
+						<div class="col-6 col-12-xsmall">
+							<input type="text" name="name" id="name" value=""
+								placeholder="{{ content.cta.form.name }}" />
+						</div>
+						<div class="col-6 col-12-xsmall">
+							<input type="email" name="email" id="email" value=""
+								placeholder="{{ content.cta.form.email }}" />
+						</div>
+						<div class="col-12">
+							<textarea name="message" id="message" placeholder="{{ content.cta.form.message }}"
+								rows="6"></textarea>
+						</div>
+						<div class="col-12">
+							<ul class="actions special">
+								<li><input type="submit" value="{{ content.cta.form.submit }}"
+										class="button fit primary" /></li>
+							</ul>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<ul class="icons">
+				{% for social in content.footer.social %}
+				<li><a href="{{ social.url }}" class="icon brands {{ social.icon }}"><span class="label">{{ social.label
+							}}</span></a></li>
+				{% endfor %}
+			</ul>
+			<ul class="copyright">
+				<li>{{ content.footer.copyright }}</li>
+				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+			</ul>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.scrollex.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/jquery.scrolly.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/browser.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/breakpoints.min.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/util.js') }}"></script>
+	<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+	<script>
+		// Add smooth scrolling to all links
+		$(document).ready(function () {
+			$(".smooth-scroll").on('click', function (event) {
+				if (this.hash !== "") {
+					event.preventDefault();
+					var hash = this.hash;
+					$('html, body').animate({
+						scrollTop: $(hash).offset().top
+					}, 800, function () {
+						window.location.hash = hash;
+					});
+				}
+			});
+		});
+	</script>
+</body>
+
+</html>

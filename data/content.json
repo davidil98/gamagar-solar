@@ -1,0 +1,131 @@
+{
+    "header": {
+        "title": "GamaGar Solar",
+        "menu": "Menú",
+        "links": [
+            {
+                "text": "Inicio",
+                "url": "#banner"
+            },
+            {
+                "text": "Servicios",
+                "url": "#services"
+            },
+            {
+                "text": "Contacto",
+                "url": "#cta"
+            }
+        ]
+    },
+    "banner": {
+        "title": "GamaGar Solar",
+        "description": "Soluciones en Energía Fotovoltaica",
+        "button": "Conocer más",
+        "button_url": "#one"
+    },
+    "intro": {
+        "title": "Soluciones en Energía Fotovoltaica",
+        "description": "Ofrecemos servicios especializados en instalación de sistemas solares, instalación de centros de carga para vehículos eléctricos y baterías para la integración de sistemas autónomos, y mantenimiento de aire acondicionado, comprometidos con la calidad y el ahorro energético.",
+        "features": [
+            {
+                "icon": "fa-sun",
+                "label": "Energía Limpia"
+            },
+            {
+                "icon": "fa-charging-station",
+                "label": "Movilidad"
+            },
+            {
+                "icon": "fa-tools",
+                "label": "Mantenimiento"
+            }
+        ]
+    },
+    "services": [
+        {
+            "title": "Instalación de Paneles Solares",
+            "description": "Diseño e instalación de sistemas fotovoltaicos residenciales y comerciales (baja y media tensión) para maximizar tu ahorro y reducir tu huella de carbono.",
+            "video": "paneles-video2.mp4"
+        },
+        {
+            "title": "Centros de Carga y Baterías",
+            "description": "Instalación certificada de cargadores para vehículos eléctricos (Tesla, BYD) y sistemas de almacenamiento de energía (PowerMe, EcoFlow).",
+            "image": "cargador_tesla.jpg"
+        },
+        {
+            "title": "Mantenimiento de Aires Acondicionados",
+            "description": "Servicio experto de reparación y mantenimiento preventivo para asegurar el óptimo funcionamiento de tus equipos de climatización.",
+            "image": "mantenimiento.jpg"
+        }
+    ],
+    "features_list": {
+        "title": "Por qué elegirnos",
+        "description": "Nos distinguimos por la calidad técnica y el compromiso con nuestros clientes.",
+        "reasons": [
+            {
+                "icon": "fa-check",
+                "title": "Experiencia",
+                "description": "Años de experiencia en el sector energético nos respaldan."
+            },
+            {
+                "icon": "fa-user-tie",
+                "title": "Atención Personalizada",
+                "description": "Trato directo con el Ing. José Gámez para asegurar tu satisfacción."
+            },
+            {
+                "icon": "fa-certificate",
+                "title": "Certificados",
+                "description": "Personal capacitado y actualizado en las últimas tecnologías."
+            },
+            {
+                "icon": "fa-hand-holding-usd",
+                "title": "Ahorro Garantizado",
+                "description": "Proyectos diseñados para optimizar tu retorno de inversión."
+            }
+        ]
+    },
+    "founder": {
+        "title": "Ing. José Gámez",
+        "description": "Fundador y Director General. Con más de 10 años de experiencia liderando proyectos de energía renovable en el norte del país.",
+        "image": "founder.jpg"
+    },
+    "cta": {
+        "title": "¿Listo para empezar?",
+        "description": "Déjanos tus datos y nos pondremos en contacto contigo a la brevedad.",
+        "form": {
+            "name": "Nombre",
+            "email": "Correo Electrónico",
+            "message": "Mensaje",
+            "submit": "Enviar Mensaje"
+        },
+        "button_primary": "Contactar",
+        "button_primary_url": "mailto:contacto@gamagarsolar.com",
+        "button_secondary": "Ver Proyectos",
+        "button_secondary_url": "#"
+    },
+    "footer": {
+        "social": [
+            {
+                "icon": "fa-whatsapp",
+                "label": "WhatsApp",
+                "url": "https://wa.me/5218112345678"
+            },
+            {
+                "icon": "fa-facebook-f",
+                "label": "Facebook",
+                "url": "#"
+            },
+            {
+                "icon": "fa-instagram",
+                "label": "Instagram",
+                "url": "#"
+            },
+            {
+                "icon": "fa-envelope",
+                "label": "Email",
+                "url": "mailto:contacto@gamagarsolar.com"
+            }
+        ],
+        "copyright": "© GamaGar Solar. Ing. José Gámez."
+    }
+}
