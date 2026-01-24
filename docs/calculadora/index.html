@@ -1,0 +1,280 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <title>Calculadora de Ahorro Solar - GamaGar Solar</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+    <link rel="stylesheet" href="../static/css/main.css" />
+    <noscript>
+        <link rel="stylesheet" href="../static/css/noscript.css" />
+    </noscript>
+</head>
+
+<body class="is-preload">
+
+    <!-- Page Wrapper -->
+    <div id="page-wrapper">
+
+        <!-- Header -->
+        <header id="header">
+            <h1><a href="../index.html">GamaGar Solar</a></h1>
+            <nav id="nav">
+                <ul>
+                    <li class="special">
+                        <a href="#menu" class="menuToggle"><span>Menú</span></a>
+                        <div id="menu">
+                            <ul>
+                                
+                                <li><a href="#banner">Inicio</a></li>
+                                
+                                <li><a href="#services">Servicios</a></li>
+                                
+                                <li><a href="">Calculadora</a></li>
+                                
+                                <li><a href="#cta">Contacto</a></li>
+                                
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- Main -->
+        <article id="main">
+            <header>
+                <h2>Calculadora de Ahorro Solar</h2>
+                <p>Calcula tu Inversión</p>
+            </header>
+            <section class="wrapper style5">
+                <div class="inner">
+
+                    <!-- Calculator Section -->
+                    <section>
+                        <h3>¿Cuánto podrías ahorrar?</h3>
+                        <form id="formCalculadora">
+                            <div class="row gtr-uniform">
+                                <div class="col-12">
+                                    <label for="inputRecibo">Monto de tu último recibo de luz (MXN)</label>
+                                    <input type="number" name="recibo" id="inputRecibo"
+                                        placeholder="Ej: 2500" min="0" step="0.1"
+                                        style="color: black;" />
+                                </div>
+                                <div class="col-12">
+                                    <ul class="actions">
+                                        <li><button type="button" onclick="calcularAhorroEcoLuna()"
+                                                class="button primary">Calcular Ahorro</button>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+
+                    <!-- Results Section -->
+                    <section id="seccionResultados" style="display: none;">
+                        <hr />
+                        <h3>Estimación de Ahorro</h3>
+                        <div class="row gtr-uniform">
+                            <div class="col-6 col-12-small">
+                                <label for="inputPaneles">Paneles Sugeridos</label>
+                                <input type="number" id="inputPaneles" min="2" step="2"
+                                    onchange="actualizarAhorroManual()" readonly
+                                    style="background-color: #ffffff; color: black;" />
+                            </div>
+                            <div class="col-6 col-12-small">
+                                <label>Ahorro Anual Estimado</label>
+                                <h3 id="resultadoAhorro" style="color: #5cb85c; margin-top: 0.5em;">$0.00 MXN</h3>
+                            </div>
+                        </div>
+                        <p><small>*Esta es una estimación basada en tarifas promedio DAC en Monterrey. Para una cotización exacta, contáctanos.</small></p>
+
+                        <!-- Calculation Details -->
+                        <details style="margin-top: 2em;">
+                            <summary><strong>Datos del Cálculo (Monterrey)</strong></summary>
+                            <ul style="margin-top: 1em;">
+                                <li>Costo Promedio kWh: <strong>$5.00 MXN</strong></li>
+                                <li>Horas Sol Pico: <strong>5.2 horas</strong></li>
+                                <li>Potencia Panel: <strong>550W</strong></li>
+                                <li>Eficiencia Estimada: <strong>80%</strong></li>
+                            </ul>
+                        </details>
+
+                        <!-- Quote Form Trigger -->
+                        <div class="col-12" style="margin-top: 2em;">
+                            <ul class="actions">
+                                <li><button type="button" onclick="mostrarFormulario()" class="button primary fit">Solicitar Cotización Formal</button></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- EcoFlow Section -->
+                    <section style="margin-top: 3em;">
+                        <header>
+                            <h4>Energía de Respaldo</h4>
+                            <h3>Baterías EcoFlow</h3>
+                        </header>
+                        <p>Integra baterías EcoFlow a tu sistema solar para almacenar energía y usarla cuando la necesites, incluso durante cortes de luz. La solución perfecta para quintas y hogares modernos.</p>
+                        <ul>
+                            <li>Energía portátil y confiable</li>
+                            <li>Carga rápida con paneles solares</li>
+                            <li>Monitoreo inteligente desde tu celular</li>
+                        </ul>
+                        <ul class="actions">
+                            <li><a href="../static/pdf/catalogo_powerme.pdf" class="button">Ver Productos EcoFlow</a></li>
+                        </ul>
+                    </section>
+
+                    <!-- Contact Form Section -->
+                    <section id="seccionFormulario" style="display: none; margin-top: 3em;">
+                        <hr />
+                        <h3>Solicitar Cotización Formal</h3>
+                        <form method="post" action="https://formspree.io/f/YOUR_FORM_ID">
+                            <div class="row gtr-uniform">
+                                <div class="col-6 col-12-xsmall">
+                                    <input type="text" name="name" id="formName"
+                                        placeholder="Nombre Completo" required />
+                                </div>
+                                <div class="col-6 col-12-xsmall">
+                                    <input type="email" name="email" id="formEmail"
+                                        placeholder="Correo Electrónico" required />
+                                </div>
+                                <div class="col-6 col-12-xsmall">
+                                    <input type="tel" name="phone" id="formPhone"
+                                        placeholder="Teléfono" />
+                                </div>
+                                <div class="col-6 col-12-xsmall">
+                                    <input type="text" name="address" id="formAddress"
+                                        placeholder="Dirección (opcional)" />
+                                </div>
+                                <!-- Hidden fields for calculation data -->
+                                <input type="hidden" name="paneles" id="hiddenPaneles" />
+                                <input type="hidden" name="ahorro_anual" id="hiddenAhorro" />
+                                <input type="hidden" name="recibo_mensual" id="hiddenRecibo" />
+                                <div class="col-12">
+                                    <textarea name="message" id="formMessage"
+                                        placeholder="Comentarios adicionales" rows="4"></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <ul class="actions">
+                                        <li><input type="submit" value="Enviar Solicitud"
+                                                class="button primary fit" /></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+
+                </div>
+            </section>
+        </article>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <ul class="icons">
+                
+                <li><a href="https://wa.me/5218112345678" class="icon brands fa-whatsapp"><span class="label">WhatsApp</span></a></li>
+                
+                <li><a href="#" class="icon brands fa-facebook-f"><span class="label">Facebook</span></a></li>
+                
+                <li><a href="#" class="icon brands fa-instagram"><span class="label">Instagram</span></a></li>
+                
+                <li><a href="mailto:contacto@gamagarsolar.com" class="icon brands fa-envelope"><span class="label">Email</span></a></li>
+                
+            </ul>
+            <ul class="copyright">
+                <li>© GamaGar Solar. Ing. José Gámez.</li>
+                <li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+            </ul>
+        </footer>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/jquery.scrollex.min.js"></script>
+    <script src="../static/js/jquery.scrolly.min.js"></script>
+    <script src="../static/js/browser.min.js"></script>
+    <script src="../static/js/breakpoints.min.js"></script>
+    <script src="../static/js/util.js"></script>
+    <script src="../static/js/main.js"></script>
+
+    <!-- Calculator Logic -->
+    <script>
+        // Variables globales para el cálculo
+        const costoKwh = 5.00;
+        const hsp = 5.2;
+        const eficiencia = 0.80;
+        const wattPanel = 550;
+
+        function calcularAhorroEcoLuna() {
+            const montoRecibo = document.getElementById('inputRecibo').value;
+            if (montoRecibo <= 0) {
+                alert("Por favor, ingresa un monto válido.");
+                return;
+            }
+
+            const kwhMensuales = montoRecibo / costoKwh;
+            const kwhDiarios = kwhMensuales / 30;
+            const wattsNecesarios = (kwhDiarios * 1000) / (hsp * eficiencia);
+
+            // Cálculo inicial
+            let numeroPaneles = wattsNecesarios / wattPanel;
+            let panelesPares = Math.ceil(numeroPaneles / 2) * 2;
+
+            // Actualizar UI - Input Value
+            document.getElementById('inputPaneles').value = panelesPares;
+
+            // Calcular ahorro basado en estos paneles
+            actualizarAhorroManual();
+
+            // Mostrar resultados
+            document.getElementById('seccionResultados').style.display = 'block';
+        }
+
+        function actualizarAhorroManual() {
+            // Recalcular ahorro si el usuario cambia los paneles manualmente
+            let paneles = document.getElementById('inputPaneles').value;
+            let reciboOriginal = document.getElementById('inputRecibo').value;
+
+            // Validación de pares
+            if (paneles % 2 != 0) {
+                paneles = parseInt(paneles) + 1;
+                document.getElementById('inputPaneles').value = paneles;
+            }
+            if (paneles < 2) {
+                paneles = 2;
+                document.getElementById('inputPaneles').value = 2;
+            }
+
+            // Estimación inversa: Cuánto generan estos paneles?
+            let wattsInstalados = paneles * wattPanel;
+            let generacionDiaria = (wattsInstalados * hsp * eficiencia) / 1000;
+            let generacionMensual = generacionDiaria * 30;
+            let ahorroEstimado = generacionMensual * costoKwh;
+            let ahorroAnual = ahorroEstimado * 12;
+
+            document.getElementById('resultadoAhorro').innerText = `$${ahorroAnual.toLocaleString('es-MX', { minimumFractionDigits: 2 })} MXN`;
+        }
+
+        function mostrarFormulario() {
+            // Populate hidden fields with calculation results
+            const paneles = document.getElementById('inputPaneles').value;
+            const ahorro = document.getElementById('resultadoAhorro').innerText;
+            const recibo = document.getElementById('inputRecibo').value;
+
+            document.getElementById('hiddenPaneles').value = paneles;
+            document.getElementById('hiddenAhorro').value = ahorro;
+            document.getElementById('hiddenRecibo').value = recibo;
+
+            // Show form
+            document.getElementById('seccionFormulario').style.display = 'block';
+
+            // Smooth scroll to form
+            document.getElementById('seccionFormulario').scrollIntoView({ behavior: 'smooth' });
+        }
+    </script>
+</body>
+
+</html>

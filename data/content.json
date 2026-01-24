@@ -12,6 +12,9 @@
                 "url": "#services"
             },
             {
+                "text": "Calculadora"
+            },
+            {
                 "text": "Contacto",
                 "url": "#cta"
             }
@@ -21,7 +24,9 @@
         "title": "GamaGar Solar",
         "description": "Soluciones en Energía Fotovoltaica",
         "button": "Conocer más",
-        "button_url": "#one"
+        "button_url": "#one",
+        "calculator_button": "Calcular Ahorro",
+        "calculator_url": "/calculadora/"
     },
     "intro": {
         "title": "Soluciones en Energía Fotovoltaica",
@@ -88,6 +93,39 @@
         "title": "Ing. José Gámez",
         "description": "Fundador y Director General. Con más de 10 años de experiencia liderando proyectos de energía renovable en el norte del país.",
         "image": "founder.jpg"
+    },
+    "calculator": {
+        "title": "Calculadora de Ahorro Solar",
+        "nav_title": "Calculadora",
+        "subtitle": "Calcula tu Inversión",
+        "heading": "¿Cuánto podrías ahorrar?",
+        "label_bill": "Monto de tu último recibo de luz (MXN)",
+        "placeholder_bill": "Ej: 2500",
+        "btn_calculate": "Calcular Ahorro",
+        "result_title": "Estimación de Ahorro",
+        "result_panels": "Paneles Sugeridos",
+        "result_savings": "Ahorro Anual Estimado",
+        "disclaimer": "*Esta es una estimación basada en tarifas promedio DAC en Monterrey. Para una cotización exacta, contáctanos.",
+        "btn_quote": "Solicitar Cotización Formal",
+        "details_title": "Datos del Cálculo (Monterrey)",
+        "detail_cost": "Costo Promedio kWh",
+        "detail_hsp": "Horas Sol Pico",
+        "detail_power": "Potencia Panel",
+        "detail_efficiency": "Eficiencia Estimada",
+        "ecoflow_subtitle": "Energía de Respaldo",
+        "ecoflow_title": "Baterías EcoFlow",
+        "ecoflow_desc": "Integra baterías EcoFlow a tu sistema solar para almacenar energía y usarla cuando la necesites, incluso durante cortes de luz. La solución perfecta para quintas y hogares modernos.",
+        "ecoflow_feature_1": "Energía portátil y confiable",
+        "ecoflow_feature_2": "Carga rápida con paneles solares",
+        "ecoflow_feature_3": "Monitoreo inteligente desde tu celular",
+        "ecoflow_btn": "Ver Productos EcoFlow",
+        "form_title": "Solicitar Cotización Formal",
+        "form_name": "Nombre Completo",
+        "form_email": "Correo Electrónico",
+        "form_phone": "Teléfono",
+        "form_address": "Dirección (opcional)",
+        "form_message": "Comentarios adicionales",
+        "form_submit": "Enviar Solicitud"
     },
     "cta": {
         "title": "¿Listo para empezar?",

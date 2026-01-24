@@ -1,6 +1,6 @@
 import json
 import os
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 
 app = Flask(__name__)
 
@@ -16,6 +16,11 @@ def load_content():
 def index():
     content = load_content()
     return render_template('index.html', content=content)
+
+@app.route('/calculadora/')
+def calculadora():
+    content = load_content()
+    return render_template('calculator.html', content=content)
 
 if __name__ == '__main__':
     app.run(debug=True)
