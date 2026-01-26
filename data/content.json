@@ -146,22 +146,12 @@
             {
                 "icon": "fa-whatsapp",
                 "label": "WhatsApp",
-                "url": "https://wa.me/5218112345678"
+                "url": "https://wa.me/528110505138"
             },
             {
-                "icon": "fa-facebook-f",
-                "label": "Facebook",
-                "url": "#"
-            },
-            {
-                "icon": "fa-instagram",
-                "label": "Instagram",
-                "url": "#"
-            },
-            {
-                "icon": "fa-envelope",
+                "icon": "bi bi-envelope",
                 "label": "Email",
-                "url": "mailto:contacto@gamagarsolar.com"
+                "url": "mailto:pepegamezlopez@gmail.com"
             }
         ],
         "copyright": "© GamaGar Solar. Ing. José Gámez."

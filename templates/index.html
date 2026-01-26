@@ -10,7 +10,9 @@
 	<title>{{ content.header.title }}</title>
 	<meta charset="utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="icon" href="{{ url_for('static', filename='images/gamagar_logo.png') }}">
 	<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}" />
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 	<noscript>
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/noscript.css') }}" />
 	</noscript>
@@ -20,6 +22,18 @@
 
 	<!-- Page Wrapper -->
 	<div id="page-wrapper">
+
+		<!-- WhatsApp Floating Button HTML -->
+
+		<div id="whatsapp-button">
+
+			<a href="https://api.whatsapp.com/send?phone=528110505138" target="_blank">
+
+				<img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/WhatsApp_icon.png" alt="WhatsApp" />
+
+			</a>
+
+		</div>
 
 		<!-- Header -->
 		<header id="header" class="alt">
@@ -43,7 +57,11 @@
 		<!-- Banner -->
 		<section id="banner">
 			<div class="inner">
-				<h2>{{ content.banner.title }}</h2>
+				<div class="logo-container mb-2" style="padding-right: 35px;">
+					<img src="{{ url_for('static', filename='images/gamagar_logo.png') }}" alt="Logo"
+						class="intro-logo animated-logo" style="background-color: white; border-radius: 50%;">
+				</div>
+				<h2 style=" font-family: Barlow, sans-serif;">{{ content.banner.title }}</h2>
 				<p>{{ content.banner.description | safe }}</p>
 				<ul class="actions special">
 					<li><a href="{{ content.banner.button_url }}" class="button primary smooth-scroll">{{
@@ -132,7 +150,7 @@
 					<h2>{{ content.cta.title }}</h2>
 					<p>{{ content.cta.description }}</p>
 				</header>
-				<form method="post" action="https://formspree.io/f/YOUR_FORM_ID">
+				<form method="POST" action="https://formspree.io/f/mkooyern">
 					<div class="row gtr-uniform">
 						<div class="col-6 col-12-xsmall">
 							<input type="text" name="name" id="name" value=""

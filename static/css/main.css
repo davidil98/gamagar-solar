@@ -160,6 +160,63 @@ textarea {
 	appearance: none;
 }
 
+/* WhatsApp Floating Button CSS */
+
+#whatsapp-button {
+	position: fixed;
+	bottom: 20px;
+	left: 20px;
+	z-index: 9999;
+}
+
+#whatsapp-button a img {
+
+	width: 50px;
+	/* Adjust size as needed */
+
+	height: auto;
+
+}
+
+/* Estilos para el logo en la bienvenida */
+.intro-logo {
+	max-width: 180px;
+	/* Tamaño ideal para escritorio */
+	height: auto;
+	filter: drop-shadow(0px 4px 8px rgba(0, 0, 0, 0.1));
+	/* Sombra sutil para dar profundidad */
+}
+
+@media (max-width: 768px) {
+	.intro-logo {
+		max-width: 120px;
+		/* Tamaño ajustado para móviles */
+	}
+
+	.main-brand-title {
+		font-size: 3.5rem;
+		/* Ajuste del nombre en móvil para que no rompa el diseño */
+	}
+}
+
+/* Animación de entrada para el logo */
+.animated-logo {
+	animation: fadeInUp 1.2s ease-out;
+}
+
+@keyframes fadeInUp {
+	from {
+		opacity: 0;
+		transform: translateY(20px);
+	}
+
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+
 /* Basic */
 
 @-ms-viewport {
