@@ -9,7 +9,7 @@ freezer = Freezer(app)
 
 if __name__ == "__main__":
     freezer.freeze()
-
-    cname_path = os.path.join('docs', 'CNAME')
-    with open(cname_path, 'w') as f:
-        f.write('gamagarsolar.com.mx')
+    # Agregar hasta configurar los DNS en Claudflar y github pages
+    #cname_path = os.path.join('docs', 'CNAME')
+    #with open(cname_path, 'w') as f:
+    #    f.write('gamagarsolar.com.mx')
