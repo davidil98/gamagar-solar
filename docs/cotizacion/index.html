@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Cotización GamaGar Solar</title>
+    <link rel="icon" type="image/png" href="../static/images/gamagar_logo.png">
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm 15mm;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            font-size: 11pt;
+            line-height: 1.4;
+            background-color: #f0f0f0;
+        }
+
+        .page-container {
+            background-color: #ffffff;
+            width: 210mm;
+            min-height: 297mm;
+            margin: 20px auto;
+            padding: 15mm;
+            box-sizing: border-box;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .no-print {
+            text-align: center;
+            margin: 20px;
+        }
+
+        button.btn-print {
+            background-color: #e76c0f;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s;
+        }
+
+        button.btn-print:hover {
+            background-color: #e76c0f;
+        }
+
+        button.btn-small {
+            background-color: #e0e0e0;
+            color: #333;
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            font-size: 9pt;
+            border-radius: 3px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        button.btn-small:hover {
+            background-color: #d0d0d0;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        .auto-resize-textarea {
+            font-family: inherit;
+            font-size: inherit;
+            color: inherit;
+            border: 1px solid #ccc;
+            background-color: #fafafa;
+            padding: 6px;
+            width: 100%;
+            box-sizing: border-box;
+            border-radius: 3px;
+        }
+
+        .auto-resize-textarea {
+            min-height: 45px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            outline: none;
+        }
+
+        .auto-resize-textarea:empty:before {
+            content: attr(data-placeholder);
+            color: #999;
+            pointer-events: none;
+            display: block;
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #e76c0f;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            position: relative;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .header-logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            max-height: 80px;
+            width: auto;
+        }
+
+        .header h1 {
+            color: #e76c0f;
+            margin: 0;
+            font-size: 24pt;
+        }
+
+        .header p {
+            margin: 5px 0 0;
+            color: #555;
+            font-size: 12pt;
+        }
+
+        .client-info {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+        }
+
+        .client-info td {
+            padding: 5px;
+            border-bottom: 1px dashed #ccc;
+            vertical-align: bottom;
+        }
+
+        .client-info td:first-child,
+        .client-info td:nth-child(3) {
+            width: 15%;
+            font-weight: bold;
+            color: #e76c0f;
+            border-bottom: none;
+            white-space: nowrap;
+        }
+
+        h2 {
+            color: #e76c0f;
+            font-size: 13pt;
+            border-bottom: 1px solid #e76c0f;
+            padding-bottom: 3px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+            page-break-after: avoid;
+        }
+
+        table.breakdown {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 5px;
+        }
+
+        table.breakdown th,
+        table.breakdown td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+            vertical-align: top;
+            position: relative;
+        }
+
+        table.breakdown th {
+            background-color: #f1f8e9;
+            color: #e76c0f;
+            font-size: 10pt;
+        }
+
+        table.breakdown td.amount {
+            width: 25%;
+            text-align: right;
+            font-family: monospace;
+            font-size: 12pt;
+        }
+
+        .amount-input-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+
+        .amount-input-wrapper span {
+            margin-right: 5px;
+            color: #aaa;
+        }
+
+        .diagram-container {
+            text-align: center;
+            margin-top: 15px;
+            padding: 15px;
+            border: 1px dashed #e76c0f;
+            background-color: #fafafa;
+            page-break-inside: avoid;
+            min-height: 200px;
+            position: relative;
+        }
+
+        .solar-grid {
+            display: table;
+            margin: 0 auto;
+            border-spacing: 5px;
+        }
+
+        .solar-row {
+            display: table-row;
+        }
+
+        .solar-panel {
+            display: table-cell;
+            width: 50px;
+            height: 80px;
+            background-color: #1565c0;
+            border: 2px solid #0d47a1;
+            border-radius: 3px;
+            color: white;
+            vertical-align: middle;
+            text-align: center;
+            font-size: 8pt;
+            position: relative;
+        }
+
+        .solar-panel::after {
+            content: '';
+            position: absolute;
+            top: 5px;
+            bottom: 5px;
+            left: 10px;
+            right: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 9pt;
+            color: #777;
+            border-top: 1px solid #ddd;
+            padding-top: 10px;
+        }
+
+        /* Delete row button */
+        .btn-delete-row {
+            position: absolute;
+            left: -25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #e53935;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 14pt;
+            display: none;
+        }
+
+        table.breakdown tr:hover .btn-delete-row {
+            display: block;
+        }
+
+        @media print {
+            body {
+                background-color: #ffffff;
+            }
+
+            .page-container {
+                margin: 0;
+                padding: 0;
+                box-shadow: none;
+                width: 100%;
+            }
+
+            .no-print {
+                display: none !important;
+            }
+
+            input[type="text"],
+            input[type="number"],
+            .auto-resize-textarea {
+                border: none;
+                background-color: transparent;
+                padding: 0;
+                resize: none;
+            }
+
+            /* Hide placeholders in print */
+            ::-webkit-input-placeholder {
+                color: transparent !important;
+            }
+
+            :-moz-placeholder {
+                color: transparent !important;
+            }
+
+            ::-moz-placeholder {
+                color: transparent !important;
+            }
+
+            :-ms-input-placeholder {
+                color: transparent !important;
+            }
+
+            .auto-resize-textarea:empty:before {
+                content: "" !important;
+            }
+
+            /* Draw line if field is empty (handled by JS toggling .print-empty) */
+            input.print-empty {
+                border-bottom: 1px solid #ccc !important;
+            }
+
+            .auto-resize-textarea.print-empty {
+                border-bottom: 1px solid #ccc !important;
+                min-height: 1.5em;
+                display: block;
+            }
+
+            /* Hide the $ sign if amount is empty */
+            .amount-input-wrapper.print-empty span {
+                display: none;
+            }
+
+            .amount-input-wrapper.print-empty {
+                border-bottom: 1px solid #ccc !important;
+                height: 1.5em;
+                width: 80px;
+                display: inline-block;
+            }
+
+            input[type="checkbox"] {
+                accent-color: #e76c0f;
+            }
+
+            .amount-input-wrapper span {
+                color: #333;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="no-print">
+        <button class="btn-print" onclick="window.print()">🖨️ Generar PDF / Imprimir</button>
+        <p style="color: #666; font-size: 0.9em; margin-top: 10px;">Llena los campos y haz clic en el botón para
+            imprimir o guardar como PDF. Los campos vacíos tendrán una línea para llenado manual en el impreso. Los
+            recuadros de texto se adaptan al contenido automáticamente.</p>
+    </div>
+
+    <div class="page-container">
+        <div class="header">
+            <img src="../static/images/gamagar_logo.png" alt="Logo GamaGar Solar"
+                class="header-logo">
+            <h1>GamaGar Solar</h1>
+            <p>Instalación de Paneles Solares y Servicios Eléctricos<br>Formato de Cotización Preliminar</p>
+        </div>
+
+        <table class="client-info">
+            <tr>
+                <td>Cliente:</td>
+                <td><input type="text" placeholder="Nombre del cliente..."></td>
+                <td>Fecha:</td>
+                <td><input type="text" placeholder="DD/MM/AAAA"></td>
+            </tr>
+            <tr>
+                <td>Dirección:</td>
+                <td colspan="3"><input type="text" placeholder="Dirección del proyecto..."></td>
+            </tr>
+        </table>
+
+        <h2>1. Desglose de Inversión</h2>
+        <table class="breakdown" id="table-inversion">
+            <tbody>
+                <tr>
+                    <th style="width: 25%;">Concepto</th>
+                    <th>Descripción / Especificaciones</th>
+                    <th style="width: 25%;">Monto Estimado</th>
+                </tr>
+                <tr>
+                    <td><button class="no-print btn-delete-row" onclick="this.closest('tr').remove()"
+                            title="Eliminar fila">✖</button><strong>Mano de Obra</strong></td>
+                    <td>
+                        <div contenteditable="true" class="auto-resize-textarea"
+                            data-placeholder="Detalles de instalación..."></div>
+                    </td>
+                    <td class="amount">
+                        <div class="amount-input-wrapper">
+                            <span>$</span><input type="text" placeholder="0.00" style="text-align: right;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><button class="no-print btn-delete-row" onclick="this.closest('tr').remove()"
+                            title="Eliminar fila">✖</button><strong>Material Consumible</strong></td>
+                    <td>
+                        <div contenteditable="true" class="auto-resize-textarea"
+                            data-placeholder="Cableado, tubería, conectores, pastillas...">Cableado, tubería,
+                            conectores, pastillas</div>
+                    </td>
+                    <td class="amount">
+                        <div class="amount-input-wrapper">
+                            <span>$</span><input type="text" placeholder="0.00" style="text-align: right;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><button class="no-print btn-delete-row" onclick="this.closest('tr').remove()"
+                            title="Eliminar fila">✖</button><strong>Estructura</strong></td>
+                    <td>
+                        <div contenteditable="true" class="auto-resize-textarea"
+                            data-placeholder="Soportes, anclaje y perfilería...">Soportes, anclaje y perfilería</div>
+                    </td>
+                    <td class="amount">
+                        <div class="amount-input-wrapper">
+                            <span>$</span><input type="text" placeholder="0.00" style="text-align: right;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><button class="no-print btn-delete-row" onclick="this.closest('tr').remove()"
+                            title="Eliminar fila">✖</button><strong>Paneles e Inversor</strong></td>
+                    <td>
+                        <label><input type="checkbox"> Central</label> &nbsp;
+                        <label><input type="checkbox"> Microinversores</label> <br><br>
+                        Capacidad/Modelo: <input type="text" placeholder="Especificar...">
+                    </td>
+                    <td class="amount">
+                        <div class="amount-input-wrapper">
+                            <span>$</span><input type="text" placeholder="0.00" style="text-align: right;">
+                        </div>
+                    </td>
+                </tr>
+                <tr class="total-row">
+                    <td colspan="2" style="text-align: right; font-weight: bold;">TOTAL ESTIMADO (CONTADO):</td>
+                    <td class="amount" style="font-weight: bold; background-color: #f1f8e9; color: #333;">
+                        <div class="amount-input-wrapper">
+                            <span>$</span><input type="text" placeholder="0.00"
+                                style="text-align: right; font-weight: bold; background-color: transparent;">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="no-print" style="margin-bottom: 15px;">
+            <button class="btn-small" onclick="addRow('table-inversion')">+ Añadir Fila de Inversión</button>
+        </div>
+
+        <h2>2. Esquemas de Pago</h2>
+        <table class="breakdown" id="table-pagos">
+            <tbody>
+                <tr>
+                    <th style="width: 30%;">Opción de Pago</th>
+                    <th>Condiciones</th>
+                    <th style="width: 25%;">Monto Final</th>
+                </tr>
+                <tr>
+                    <td><button class="no-print btn-delete-row" onclick="this.closest('tr').remove()"
+                            title="Eliminar fila">✖</button><strong>Contado</strong></td>
+                    <td>
+                        <div contenteditable="true" class="auto-resize-textarea"
+                            data-placeholder="Anticipo para material, liquidación al terminar.">Anticipo para material,
+                            liquidación al terminar.</div>
+                    </td>
+                    <td class="amount">
+                        <div class="amount-input-wrapper">
+                            <span>$</span><input type="text" placeholder="0.00" style="text-align: right;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><button class="no-print btn-delete-row" onclick="this.closest('tr').remove()"
+                            title="Eliminar fila">✖</button><strong>Crédito Mercado Pago (6 Meses)</strong></td>
+                    <td>
+                        <div contenteditable="true" class="auto-resize-textarea"
+                            data-placeholder="Incluye comisión de plataforma.">Incluye comisión de plataforma.</div>
+                    </td>
+                    <td class="amount">
+                        <div class="amount-input-wrapper">
+                            <span>$</span><input type="text" placeholder="0.00" style="text-align: right;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><button class="no-print btn-delete-row" onclick="this.closest('tr').remove()"
+                            title="Eliminar fila">✖</button><input type="text" placeholder="Otra opción..."></td>
+                    <td>
+                        <div contenteditable="true" class="auto-resize-textarea" data-placeholder="Condiciones...">
+                        </div>
+                    </td>
+                    <td class="amount">
+                        <div class="amount-input-wrapper">
+                            <span>$</span><input type="text" placeholder="0.00" style="text-align: right;">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="no-print" style="margin-bottom: 15px;">
+            <button class="btn-small" onclick="addRow('table-pagos')">+ Añadir Esquema de Pago</button>
+        </div>
+
+        <h2>3. Opciones de Escalabilidad</h2>
+        <table class="breakdown" id="table-escala">
+            <tbody>
+                <tr>
+                    <th style="width: 30%;">Configuración</th>
+                    <th>Producción / Notas</th>
+                    <th style="width: 25%;">Costo Extra</th>
+                </tr>
+                <tr>
+                    <td><button class="no-print btn-delete-row" onclick="this.closest('tr').remove()"
+                            title="Eliminar fila">✖</button><input type="text" value="Sistema 4 Paneles"></td>
+                    <td>
+                        <div contenteditable="true" class="auto-resize-textarea" data-placeholder="Notas..."></div>
+                    </td>
+                    <td class="amount">
+                        <div class="amount-input-wrapper">
+                            <span>$</span><input type="text" placeholder="-" style="text-align: right;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><button class="no-print btn-delete-row" onclick="this.closest('tr').remove()"
+                            title="Eliminar fila">✖</button><input type="text" value="Sistema 6 Paneles"></td>
+                    <td>
+                        <div contenteditable="true" class="auto-resize-textarea" data-placeholder="Notas..."></div>
+                    </td>
+                    <td class="amount">
+                        <div class="amount-input-wrapper">
+                            <span>+$</span><input type="text" placeholder="0.00" style="text-align: right;">
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td><button class="no-print btn-delete-row" onclick="this.closest('tr').remove()"
+                            title="Eliminar fila">✖</button><input type="text" value="Sistema 8 Paneles"></td>
+                    <td>
+                        <div contenteditable="true" class="auto-resize-textarea" data-placeholder="Notas..."></div>
+                    </td>
+                    <td class="amount">
+                        <div class="amount-input-wrapper">
+                            <span>+$</span><input type="text" placeholder="0.00" style="text-align: right;">
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="no-print" style="margin-bottom: 15px;">
+            <button class="btn-small" onclick="addRow('table-escala')">+ Añadir Opción de Escalabilidad</button>
+        </div>
+
+        <h2>4. Diagrama de Arreglo Solar en Techo</h2>
+        <div class="no-print" style="margin-bottom: 10px; text-align: center;">
+            <button class="btn-small" onclick="addPanel()">+ Agregar Panel</button>
+            <button class="btn-small" onclick="removePanel()">- Quitar Panel</button>
+            <button class="btn-small" onclick="addRowPanel()">+ Agregar Fila</button>
+            <button class="btn-small" onclick="removeRowPanel()">- Quitar Fila</button>
+        </div>
+        <div class="diagram-container">
+            <p style="text-align:left; color:#555; margin-top:0; margin-bottom:10px; font-size: 9pt;"><em>Croquis de
+                    distribución e inclinación (rayar según levantamiento):</em></p>
+            <div class="solar-grid" id="solar-grid">
+                <div class="solar-row">
+                    <div class="solar-panel">1</div>
+                    <div class="solar-panel">2</div>
+                    <div class="solar-panel">3</div>
+                    <div class="solar-panel">4</div>
+                </div>
+            </div>
+            <div
+                style="position: absolute; bottom: 10px; right: 15px; font-size: 9pt; color: #aaa; display: flex; align-items: center; width: 60%; justify-content: flex-end;">
+                <span style="white-space: nowrap;">Notas del techo: </span>
+                <input type="text"
+                    style="background: transparent; border: none; border-bottom: 1px dashed #ccc; margin-left: 5px; flex-grow: 1;">
+            </div>
+        </div>
+
+        <div class="footer">
+            <strong>GamaGar Solar - gamagarsolar.com.mx | WhatsApp: 81 1050 5138</strong><br>
+            <em>*Esta es una cotización preliminar sujeta a levantamiento técnico final.</em>
+        </div>
+    </div>
+
+    <script>
+        // Set up print preparation to hide symbols and prices if empty
+        window.addEventListener('beforeprint', () => {
+            // Inputs
+            document.querySelectorAll('input[type="text"]').forEach(input => {
+                if (!input.value.trim() && !input.hasAttribute('data-ignore-empty')) {
+                    input.classList.add('print-empty');
+                } else {
+                    input.classList.remove('print-empty');
+                }
+            });
+            // Amount wrappers
+            document.querySelectorAll('.amount-input-wrapper').forEach(wrapper => {
+                const input = wrapper.querySelector('input');
+                if (input && !input.value.trim()) {
+                    wrapper.classList.add('print-empty');
+                } else {
+                    wrapper.classList.remove('print-empty');
+                }
+            });
+            // Text areas (contenteditable)
+            document.querySelectorAll('.auto-resize-textarea').forEach(ta => {
+                if (!ta.textContent.trim()) {
+                    ta.classList.add('print-empty');
+                } else {
+                    ta.classList.remove('print-empty');
+                }
+            });
+        });
+
+        function addRow(tableId) {
+            const table = document.getElementById(tableId);
+            const tbody = table.querySelector('tbody');
+            const tr = document.createElement('tr');
+
+            let html = `<td><button class="no-print btn-delete-row" onclick="this.closest('tr').remove()" title="Eliminar fila">✖</button><input type="text" placeholder="Nuevo concepto/opción..."></td>
+                        <td><div contenteditable="true" class="auto-resize-textarea" data-placeholder="Descripción / Notas..."></div></td>
+                        <td class="amount">
+                            <div class="amount-input-wrapper">
+                                <span>$</span><input type="text" placeholder="0.00" style="text-align: right;">
+                            </div>
+                        </td>`;
+            tr.innerHTML = html;
+
+            // Check if there is a .total-row
+            const totalRow = tbody.querySelector('.total-row');
+            if (totalRow) {
+                tbody.insertBefore(tr, totalRow);
+            } else {
+                tbody.appendChild(tr);
+            }
+        }
+
+        function updatePanelNumbers() {
+            const panels = document.querySelectorAll('.solar-panel');
+            panels.forEach((p, index) => {
+                p.textContent = index + 1;
+            });
+        }
+
+        function addPanel() {
+            const rows = document.querySelectorAll('.solar-row');
+            if (rows.length === 0) return; // Need at least one row
+            const lastRow = rows[rows.length - 1];
+            const panel = document.createElement('div');
+            panel.className = 'solar-panel';
+            lastRow.appendChild(panel);
+            updatePanelNumbers();
+        }
+
+        function removePanel() {
+            const rows = document.querySelectorAll('.solar-row');
+            for (let i = rows.length - 1; i >= 0; i--) {
+                const panels = rows[i].querySelectorAll('.solar-panel');
+                if (panels.length > 0) {
+                    panels[panels.length - 1].remove();
+                    updatePanelNumbers();
+                    return;
+                }
+            }
+        }
+
+        function addRowPanel() {
+            const grid = document.getElementById('solar-grid');
+            const row = document.createElement('div');
+            row.className = 'solar-row';
+            grid.appendChild(row);
+            // Add a panel automatically to the new row
+            const panel = document.createElement('div');
+            panel.className = 'solar-panel';
+            row.appendChild(panel);
+            updatePanelNumbers();
+        }
+
+        function removeRowPanel() {
+            const grid = document.getElementById('solar-grid');
+            const rows = grid.querySelectorAll('.solar-row');
+            if (rows.length > 0) {
+                rows[rows.length - 1].remove();
+                updatePanelNumbers();
+            }
+        }
+    </script>
+</body>
+
+</html>
