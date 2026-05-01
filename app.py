@@ -22,5 +22,10 @@ def calculadora():
     content = load_content()
     return render_template('calculator.html', content=content)
 
+@app.route('/cotizacion/')
+def cotizacion():
+    content = load_content()
+    return render_template('quotation.html', content=content)
+
 if __name__ == '__main__':
     app.run(debug=True)
