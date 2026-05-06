@@ -442,10 +442,17 @@
                     </td>
                 </tr>
                 <tr class="total-row">
-                    <td colspan="2" style="text-align: right; font-weight: bold;">TOTAL ESTIMADO (CONTADO):</td>
+                    <td colspan="2" style="text-align: right; font-weight: bold; vertical-align: middle;">
+                        <label class="no-print"
+                            style="margin-right: 15px; font-weight: normal; font-size: 10pt; color: #555; cursor: pointer;">
+                            <input type="checkbox" id="auto-sum-inversion"
+                                style="width: auto; margin-right: 5px;">Autocalcular Total
+                        </label>
+                        TOTAL ESTIMADO (CONTADO):
+                    </td>
                     <td class="amount" style="font-weight: bold; background-color: #f1f8e9; color: #333;">
                         <div class="amount-input-wrapper">
-                            <span>$</span><input type="text" placeholder="0.00"
+                            <span>$</span><input type="text" id="inversion-total" placeholder="0.00"
                                 style="text-align: right; font-weight: bold; background-color: transparent;">
                         </div>
                     </td>
@@ -586,115 +593,303 @@
             </div>
         </div>
 
-        <div class="footer">
-            <strong>GamaGar Solar - gamagarsolar.com.mx | WhatsApp: 81 1050 5138</strong><br>
-            <em>*Esta es una cotización preliminar sujeta a levantamiento técnico final.</em>
+        <h2>5. Proyección de Ahorro y Retorno de Inversión</h2>
+
+        <div id="roi-container">
+            <div class="roi-block" style="margin-bottom: 30px; position: relative;">
+                <h3
+                    style="color: #2e7d32; font-size: 12pt; margin-top: 0; margin-bottom: 10px; display:flex; align-items:center;">
+                    <span style="margin-right: 5px;">Cálculo para Sistema de</span>
+                    <input type="number" class="panel-count-input" value="4"
+                        style="width: 50px; text-align: center; border: 1px dashed #ccc; background: transparent; color: #2e7d32; font-weight: bold; font-size: 12pt;"
+                        data-ignore-empty="true">
+                    <span style="margin-left: 5px;">Paneles</span>
+                    <button class="no-print btn-delete-row"
+                        style="position:static; transform:none; margin-left: 15px; font-size: 12pt;"
+                        onclick="this.closest('.roi-block').remove();" title="Eliminar cálculo">✖</button>
+                </h3>
+                <div class="no-print"
+                    style="background-color: #e8f5e9; padding: 15px; border-radius: 5px; margin-bottom: 15px; border: 1px solid #c8e6c9;">
+                    <strong style="color: #2e7d32; display: block; margin-bottom: 10px;">Calculadora Interna (Empírica)
+                        - Solo visible para ustedes</strong>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 150px;">
+                            <label style="font-size: 9pt; color: #555;">Gasto Anual CFE ($):</label>
+                            <input type="number" class="emp-gasto-actual" value="33050"
+                                oninput="calcularEmpirico(this)">
+                        </div>
+                        <div style="flex: 1; min-width: 150px;">
+                            <label style="font-size: 9pt; color: #555;">Nuevo Pago Anual ($):</label>
+                            <input type="number" class="emp-nuevo-pago" value="513" oninput="calcularEmpirico(this)">
+                        </div>
+                        <div style="flex: 1; min-width: 150px;">
+                            <label style="font-size: 9pt; color: #555;">Excedente CFE ($):</label>
+                            <input type="number" class="emp-excedente" value="0" oninput="calcularEmpirico(this)"
+                                title="Ahorro potencial / Excedente anual que da CFE">
+                        </div>
+                        <div style="flex: 1; min-width: 150px;">
+                            <label style="font-size: 9pt; color: #555;">Costo del Sistema ($):</label>
+                            <input type="number" class="emp-costo-total" placeholder="0.00"
+                                oninput="calcularEmpirico(this)">
+                            <button class="btn-small" style="font-size: 8pt; margin-top: 5px;"
+                                onclick="copiarTotalEmpirico(this)">Copiar Total ↑</button>
+                        </div>
+                    </div>
+                </div>
+                <table class="breakdown" style="border: none; width: 100%;">
+                    <tr style="background-color: transparent;">
+                        <td style="border: none; width: 25%; text-align: center; padding: 10px;">
+                            <span style="font-size: 11pt; color: #555; display: block; margin-bottom: 5px;">Tu Gasto
+                                Anual Actual</span>
+                            <span
+                                style="font-size: 14pt; color: #d32f2f; font-weight: bold; text-decoration: line-through;">$<span
+                                    class="vista-gasto-actual">33,050.00</span></span>
+                        </td>
+                        <td
+                            style="border: none; width: 25%; text-align: center; padding: 10px; background-color: #f1f8e9; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05);">
+                            <span
+                                style="font-size: 11pt; color: #2e7d32; display: block; margin-bottom: 5px; font-weight: bold;">Tu
+                                Nuevo Pago Anual</span>
+                            <span style="font-size: 18pt; color: #2e7d32; font-weight: bold;">$<span
+                                    class="vista-nuevo-pago">513.00</span></span>
+                        </td>
+                        <td style="border: none; width: 25%; text-align: center; padding: 10px;">
+                            <span style="font-size: 11pt; color: #555; display: block; margin-bottom: 5px;">Excedente
+                                CFE</span>
+                            <span style="font-size: 14pt; color: #0288d1; font-weight: bold;">+$<span
+                                    class="vista-excedente">0.00</span></span>
+                        </td>
+                        <td style="border: none; width: 25%; text-align: center; padding: 10px;">
+                            <span style="font-size: 11pt; color: #555; display: block; margin-bottom: 5px;">Ahorro Anual
+                                Total</span>
+                            <span style="font-size: 14pt; color: #1976d2; font-weight: bold;">$<span
+                                    class="vista-ahorro">32,537.00</span></span>
+                        </td>
+                    </tr>
+                    <tr style="background-color: transparent;">
+                        <td colspan="4" style="border: none; text-align: center; padding-top: 15px;">
+                            <div
+                                style="display: inline-block; border-top: 2px dashed #ccc; padding-top: 15px; width: 80%;">
+                                <span style="font-size: 12pt; color: #555;">El tiempo de retorno de su inversión es
+                                    de:</span><br>
+                                <span style="font-size: 18pt; color: #e76c0f; font-weight: bold;"><span
+                                        class="vista-anios">0.00</span> Años</span>
+                                <span style="font-size: 11pt; color: #777; margin-left: 10px;">(Aprox. <span
+                                        class="vista-bimestres">0</span> bimestres)</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="no-print" style="margin-bottom: 25px; text-align: center;">
+                <button class="btn-small" onclick="addRoiBlock()">+ Añadir Cálculo para Opción de Escalabilidad</button>
+            </div>
+
+            <div class="footer">
+                <strong>GamaGar Solar - gamagarsolar.com.mx | WhatsApp: 81 1050 5138</strong><br>
+                <em>*Esta es una cotización preliminar sujeta a levantamiento técnico final.</em>
+            </div>
         </div>
-    </div>
 
-    <script>
-        // Set up print preparation to hide symbols and prices if empty
-        window.addEventListener('beforeprint', () => {
-            // Inputs
-            document.querySelectorAll('input[type="text"]').forEach(input => {
-                if (!input.value.trim() && !input.hasAttribute('data-ignore-empty')) {
-                    input.classList.add('print-empty');
-                } else {
-                    input.classList.remove('print-empty');
+        <script>
+            // Set up print preparation to hide symbols and prices if empty
+            window.addEventListener('beforeprint', () => {
+                // Inputs
+                document.querySelectorAll('input[type="text"]').forEach(input => {
+                    if (!input.value.trim() && !input.hasAttribute('data-ignore-empty')) {
+                        input.classList.add('print-empty');
+                    } else {
+                        input.classList.remove('print-empty');
+                    }
+                });
+                // Amount wrappers
+                document.querySelectorAll('.amount-input-wrapper').forEach(wrapper => {
+                    const input = wrapper.querySelector('input');
+                    if (input && !input.value.trim()) {
+                        wrapper.classList.add('print-empty');
+                    } else {
+                        wrapper.classList.remove('print-empty');
+                    }
+                });
+                // Text areas (contenteditable)
+                document.querySelectorAll('.auto-resize-textarea').forEach(ta => {
+                    if (!ta.textContent.trim()) {
+                        ta.classList.add('print-empty');
+                    } else {
+                        ta.classList.remove('print-empty');
+                    }
+                });
+            });
+            // Auto-sum logic
+            function updateAutoSum() {
+                const checkbox = document.getElementById('auto-sum-inversion');
+                const totalInput = document.getElementById('inversion-total');
+                if (!checkbox) return;
+
+                if (!checkbox.checked) {
+                    totalInput.readOnly = false;
+                    totalInput.style.backgroundColor = 'transparent';
+                    return;
+                }
+
+                totalInput.readOnly = true;
+                totalInput.style.backgroundColor = 'rgba(0,0,0,0.02)';
+
+                let sum = 0;
+                const inputs = document.querySelectorAll('#table-inversion .amount-input-wrapper input[type="text"]:not(#inversion-total)');
+                inputs.forEach(input => {
+                    // Remove commas and parse
+                    const val = parseFloat(input.value.replace(/,/g, ''));
+                    if (!isNaN(val)) {
+                        sum += val;
+                    }
+                });
+
+                // Format with commas and 2 decimals
+                totalInput.value = sum.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+            }
+
+            document.getElementById('auto-sum-inversion').addEventListener('change', updateAutoSum);
+            document.getElementById('table-inversion').addEventListener('input', (e) => {
+                if (e.target.tagName === 'INPUT' && e.target.type === 'text') {
+                    const checkbox = document.getElementById('auto-sum-inversion');
+                    if (checkbox && checkbox.checked) updateAutoSum();
                 }
             });
-            // Amount wrappers
-            document.querySelectorAll('.amount-input-wrapper').forEach(wrapper => {
-                const input = wrapper.querySelector('input');
-                if (input && !input.value.trim()) {
-                    wrapper.classList.add('print-empty');
-                } else {
-                    wrapper.classList.remove('print-empty');
-                }
-            });
-            // Text areas (contenteditable)
-            document.querySelectorAll('.auto-resize-textarea').forEach(ta => {
-                if (!ta.textContent.trim()) {
-                    ta.classList.add('print-empty');
-                } else {
-                    ta.classList.remove('print-empty');
-                }
-            });
-        });
+            // ROI Calculator Logic
+            function calcularEmpirico(element) {
+                const block = element ? element.closest('.roi-block') : document.querySelector('.roi-block');
+                if (!block) return;
 
-        function addRow(tableId) {
-            const table = document.getElementById(tableId);
-            const tbody = table.querySelector('tbody');
-            const tr = document.createElement('tr');
+                const gastoActual = parseFloat(block.querySelector('.emp-gasto-actual').value) || 0;
+                const nuevoPago = parseFloat(block.querySelector('.emp-nuevo-pago').value) || 0;
+                const excedente = parseFloat(block.querySelector('.emp-excedente').value) || 0;
+                const costoTotal = parseFloat(block.querySelector('.emp-costo-total').value) || 0;
+                const ahorroAnual = (gastoActual - nuevoPago) + excedente;
 
-            let html = `<td><button class="no-print btn-delete-row" onclick="this.closest('tr').remove()" title="Eliminar fila">✖</button><input type="text" placeholder="Nuevo concepto/opción..."></td>
+                // Actualizar vista del cliente
+                block.querySelector('.vista-gasto-actual').textContent = gastoActual.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                block.querySelector('.vista-nuevo-pago').textContent = nuevoPago.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                block.querySelector('.vista-excedente').textContent = excedente.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+                block.querySelector('.vista-ahorro').textContent = Math.max(0, ahorroAnual).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+                // Calcular Retorno (Años = Costo / Ahorro Anual)
+                if (ahorroAnual > 0 && costoTotal > 0) {
+                    const anios = costoTotal / ahorroAnual;
+                    const bimestres = anios * 6;
+                    block.querySelector('.vista-anios').textContent = anios.toFixed(2);
+                    block.querySelector('.vista-bimestres').textContent = Math.ceil(bimestres);
+                } else {
+                    block.querySelector('.vista-anios').textContent = '0.00';
+                    block.querySelector('.vista-bimestres').textContent = '0';
+                }
+            }
+
+            function copiarTotalEmpirico(btn) {
+                const block = btn.closest('.roi-block');
+                const totalStr = document.getElementById('inversion-total').value.replace(/,/g, '');
+                const total = parseFloat(totalStr);
+                if (!isNaN(total)) {
+                    block.querySelector('.emp-costo-total').value = total.toFixed(2);
+                    calcularEmpirico(block.querySelector('.emp-costo-total'));
+                }
+            }
+
+            function addRoiBlock() {
+                const container = document.getElementById('roi-container');
+                const blocks = container.querySelectorAll('.roi-block');
+                if (blocks.length === 0) return;
+
+                const lastBlock = blocks[blocks.length - 1];
+                const newBlock = lastBlock.cloneNode(true);
+
+                // Increment panel count default value slightly for UI feedback if it's a number
+                const panelInput = newBlock.querySelector('.panel-count-input');
+                let panelCount = parseInt(panelInput.value) || 0;
+                if (panelCount > 0) panelInput.value = panelCount + 2;
+                container.appendChild(newBlock);
+                calcularEmpirico(newBlock.querySelector('.emp-gasto-actual'));
+            }
+
+            // Ejecutar al cargar la página para mostrar los valores por defecto
+            window.onload = function () {
+                document.querySelectorAll('.roi-block').forEach(block => calcularEmpirico(block.querySelector('.emp-gasto-actual')));
+            };
+
+            function addRow(tableId) {
+                const table = document.getElementById(tableId);
+                const tbody = table.querySelector('tbody');
+                const tr = document.createElement('tr');
+
+                let html = `<td><button class="no-print btn-delete-row" onclick="this.closest('tr').remove()" title="Eliminar fila">✖</button><input type="text" placeholder="Nuevo concepto/opción..."></td>
                         <td><div contenteditable="true" class="auto-resize-textarea" data-placeholder="Descripción / Notas..."></div></td>
                         <td class="amount">
                             <div class="amount-input-wrapper">
                                 <span>$</span><input type="text" placeholder="0.00" style="text-align: right;">
                             </div>
                         </td>`;
-            tr.innerHTML = html;
+                tr.innerHTML = html;
 
-            // Check if there is a .total-row
-            const totalRow = tbody.querySelector('.total-row');
-            if (totalRow) {
-                tbody.insertBefore(tr, totalRow);
-            } else {
-                tbody.appendChild(tr);
-            }
-        }
-
-        function updatePanelNumbers() {
-            const panels = document.querySelectorAll('.solar-panel');
-            panels.forEach((p, index) => {
-                p.textContent = index + 1;
-            });
-        }
-
-        function addPanel() {
-            const rows = document.querySelectorAll('.solar-row');
-            if (rows.length === 0) return; // Need at least one row
-            const lastRow = rows[rows.length - 1];
-            const panel = document.createElement('div');
-            panel.className = 'solar-panel';
-            lastRow.appendChild(panel);
-            updatePanelNumbers();
-        }
-
-        function removePanel() {
-            const rows = document.querySelectorAll('.solar-row');
-            for (let i = rows.length - 1; i >= 0; i--) {
-                const panels = rows[i].querySelectorAll('.solar-panel');
-                if (panels.length > 0) {
-                    panels[panels.length - 1].remove();
-                    updatePanelNumbers();
-                    return;
+                // Check if there is a .total-row
+                const totalRow = tbody.querySelector('.total-row');
+                if (totalRow) {
+                    tbody.insertBefore(tr, totalRow);
+                } else {
+                    tbody.appendChild(tr);
                 }
             }
-        }
 
-        function addRowPanel() {
-            const grid = document.getElementById('solar-grid');
-            const row = document.createElement('div');
-            row.className = 'solar-row';
-            grid.appendChild(row);
-            // Add a panel automatically to the new row
-            const panel = document.createElement('div');
-            panel.className = 'solar-panel';
-            row.appendChild(panel);
-            updatePanelNumbers();
-        }
+            function updatePanelNumbers() {
+                const panels = document.querySelectorAll('.solar-panel');
+                panels.forEach((p, index) => {
+                    p.textContent = index + 1;
+                });
+            }
 
-        function removeRowPanel() {
-            const grid = document.getElementById('solar-grid');
-            const rows = grid.querySelectorAll('.solar-row');
-            if (rows.length > 0) {
-                rows[rows.length - 1].remove();
+            function addPanel() {
+                const rows = document.querySelectorAll('.solar-row');
+                if (rows.length === 0) return; // Need at least one row
+                const lastRow = rows[rows.length - 1];
+                const panel = document.createElement('div');
+                panel.className = 'solar-panel';
+                lastRow.appendChild(panel);
                 updatePanelNumbers();
             }
-        }
-    </script>
+
+            function removePanel() {
+                const rows = document.querySelectorAll('.solar-row');
+                for (let i = rows.length - 1; i >= 0; i--) {
+                    const panels = rows[i].querySelectorAll('.solar-panel');
+                    if (panels.length > 0) {
+                        panels[panels.length - 1].remove();
+                        updatePanelNumbers();
+                        return;
+                    }
+                }
+            }
+
+            function addRowPanel() {
+                const grid = document.getElementById('solar-grid');
+                const row = document.createElement('div');
+                row.className = 'solar-row';
+                grid.appendChild(row);
+                // Add a panel automatically to the new row
+                const panel = document.createElement('div');
+                panel.className = 'solar-panel';
+                row.appendChild(panel);
+                updatePanelNumbers();
+            }
+
+            function removeRowPanel() {
+                const grid = document.getElementById('solar-grid');
+                const rows = grid.querySelectorAll('.solar-row');
+                if (rows.length > 0) {
+                    rows[rows.length - 1].remove();
+                    updatePanelNumbers();
+                }
+            }
+        </script>
 </body>
 
 </html>
