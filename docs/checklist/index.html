@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Checklist Dinámico - GamaGar Solar</title>
+    <link rel="icon" type="image/png" href="../static/images/gamagar_logo.png">
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            color: #333;
+            line-height: 1.5;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .no-print-top {
+            text-align: center;
+            margin: 20px;
+        }
+
+        .container {
+            background-color: #fff;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .header {
+            text-align: center;
+            border-bottom: 3px solid #e76c0f;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            position: relative;
+            min-height: 80px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .header-logo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            max-height: 80px;
+            width: auto;
+        }
+
+        .header h1 {
+            color: #e76c0f;
+            margin: 0;
+            font-size: 24pt;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .info-field {
+            display: flex;
+            border-bottom: 1px dashed #ccc;
+        }
+
+        .info-field label {
+            font-weight: bold;
+            color: #e76c0f;
+            margin-right: 10px;
+            white-space: nowrap;
+        }
+
+        .info-field input {
+            border: none;
+            background: transparent;
+            flex-grow: 1;
+            font-family: inherit;
+            font-size: 11pt;
+            outline: none;
+        }
+
+        /* Estilos de las Secciones Dinámicas */
+        .section-container {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            background-color: #e76c0f;
+            border-radius: 3px;
+            padding: 5px 10px;
+            margin-top: 15px;
+            margin-bottom: 10px;
+        }
+
+        .section-header h2 {
+            font-size: 14pt;
+            color: #fff;
+            margin: 0;
+            flex-grow: 1;
+            outline: none;
+        }
+
+        .section-header h2[contenteditable="true"]:focus {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 3px;
+        }
+
+        .checklist-group {
+            padding-left: 5px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 8px;
+            position: relative;
+        }
+
+        .check-item input[type="checkbox"] {
+            margin-top: 4px;
+            margin-right: 10px;
+            transform: scale(1.2);
+            accent-color: #e76c0f;
+            cursor: pointer;
+        }
+
+        .check-text {
+            font-size: 11pt;
+            flex-grow: 1;
+            outline: none;
+            padding: 2px 5px;
+            border: 1px solid transparent;
+        }
+
+        .check-text[contenteditable="true"]:focus {
+            border: 1px dashed #e76c0f;
+            background-color: #fafafa;
+        }
+
+        /* Botones y Controles (No se imprimen) */
+        .no-print-controls {
+            margin-top: 5px;
+            margin-bottom: 15px;
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-small {
+            background-color: #e0e0e0;
+            color: #333;
+            border: 1px solid #ccc;
+            padding: 4px 8px;
+            font-size: 9pt;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .btn-small:hover {
+            background-color: #d0d0d0;
+        }
+
+        .btn-delete {
+            color: #e53935;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 12pt;
+            padding: 0 5px;
+            opacity: 0.5;
+        }
+
+        .btn-delete:hover {
+            opacity: 1;
+        }
+
+        .check-item:hover .btn-delete {
+            display: block;
+        }
+
+        .section-header .btn-delete {
+            color: #ffcdd2;
+            opacity: 0.8;
+        }
+
+        .section-header .btn-delete:hover {
+            color: #fff;
+            opacity: 1;
+        }
+
+        .textarea-section {
+            margin-top: 20px;
+        }
+
+        .textarea-section label {
+            font-weight: bold;
+            color: #e76c0f;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 80px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            font-family: inherit;
+            font-size: 11pt;
+            box-sizing: border-box;
+            resize: vertical;
+        }
+
+        button.btn-print {
+            background-color: #e76c0f;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.2s;
+        }
+
+        @media print {
+            body {
+                background-color: #fff;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+
+            button.btn-print,
+            .no-print-controls,
+            .btn-delete {
+                display: none !important;
+            }
+
+            input::-webkit-input-placeholder,
+            textarea::-webkit-input-placeholder {
+                color: transparent;
+            }
+
+            textarea {
+                border: 1px dashed #ccc;
+            }
+
+            .check-text[contenteditable="true"]:focus {
+                border: none;
+                background: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="no-print-top">
+        <button class="btn-print" onclick="window.print()">🖨️ Generar PDF / Imprimir</button>
+        <button class="btn-print" style="background-color: #0288d1; margin-left: 10px;" onclick="guardarBorrador()">💾
+            Guardar Borrador</button>
+        <button class="btn-print" style="background-color: #f57c00; margin-left: 10px;" onclick="cargarBorrador()">📂
+            Cargar Borrador</button>
+        <p style="color: #666; font-size: 0.9em; margin-top: 10px;">Llena los campos y haz clic en el botón para
+            imprimir o guardar como PDF. Los campos vacíos tendrán una línea para llenado manual en el impreso. Los
+            recuadros de texto se adaptan al contenido automáticamente.</p>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <img src="../static/images/gamagar_logo.png" alt="Logo GamaGar Solar"
+                class="header-logo">
+            <h1>GamaGar Solar</h1>
+            <p>Checklist de Instalación Fotovoltaica</p>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-field"><label>Cliente:</label><input type="text" placeholder="Nombre..."></div>
+            <div class="info-field"><label>Fecha:</label><input type="text" placeholder="DD/MM/AAAA"></div>
+            <div class="info-field"><label>Técnico Lider:</label><input type="text" value="José Fidencio Gámez"></div>
+            <div class="info-field"><label>Sistema:</label><input type="text" placeholder="Ej. 8 Paneles"></div>
+        </div>
+
+        <div id="sections-wrapper">
+            <!-- Las secciones se generarán aquí con JavaScript -->
+        </div>
+
+        <div class="no-print-controls"
+            style="justify-content: center; margin-top: 30px; border-top: 2px dashed #ccc; padding-top: 20px;">
+            <button class="btn-small" onclick="addSection()">+ Añadir Nueva Sección</button>
+        </div>
+
+        <div class="textarea-section">
+            <label for="material-remanente">📦 Material Remanente (Inventario / Devolución):</label>
+            <textarea id="material-remanente" placeholder="Anota lo que sobró y regresa a bodega..."></textarea>
+        </div>
+
+        <div class="textarea-section">
+            <label for="notas">📝 Notas de Campo:</label>
+            <textarea id="notas" placeholder="Observaciones del techo, peticiones extras del cliente..."></textarea>
+        </div>
+    </div>
+
+    <script>
+        // Estructura base inicial (Versátil y segmentada)
+        const initialData = [
+            {
+                title: "1. Bodega: Herramientas y Consumibles",
+                tasks: [
+                    "Taladro, brocas, impacto y dados listos con batería.",
+                    "Multímetro, pinza amperimétrica y desarmadores aislados.",
+                    "Sellador de poliuretano / Impermeabilizante para perforaciones.",
+                    "Tornillería completa, taquetes y conectores MC4 extra."
+                ]
+            },
+            {
+                title: "2. Bodega: Material Principal",
+                tasks: [
+                    "Paneles solares revisados (sin cristales rotos).",
+                    "Estructuras de aluminio y rieles completos.",
+                    "Inversor / Microinversores en su caja.",
+                    "Rollos de cable fotovoltaico y tubería conduit."
+                ]
+            },
+            {
+                title: "3. Llegada y Seguridad en Techo",
+                tasks: [
+                    "Equipo de Protección Personal (EPP) en uso.",
+                    "Evaluación de la ruta de subida de paneles.",
+                    "Verificación de puntos de anclaje seguros en la losa."
+                ]
+            },
+            {
+                title: "4. Montaje y Eléctrico",
+                tasks: [
+                    "Perforaciones selladas y estructura anclada firmemente.",
+                    "Paneles montados y clamps apretados al torque correcto.",
+                    "Cableado fotovoltaico canalizado y sin tocar el techo.",
+                    "Puesta a tierra continua en paneles y rieles."
+                ]
+            }
+        ];
+
+        const wrapper = document.getElementById('sections-wrapper');
+
+        // Función para renderizar el checklist
+        function renderChecklist() {
+            wrapper.innerHTML = '';
+            initialData.forEach((section, index) => {
+                wrapper.appendChild(createSectionElement(section.title, section.tasks, index));
+            });
+        }
+
+        // Crear elemento de sección
+        function createSectionElement(title, tasks, sectionId) {
+            const sectionDiv = document.createElement('div');
+            sectionDiv.className = 'section-container';
+            sectionDiv.id = 'section-' + sectionId;
+
+            // Header de la sección
+            const header = document.createElement('div');
+            header.className = 'section-header';
+            header.innerHTML = `
+            <h2 contenteditable="true">${title}</h2>
+            <button class="btn-delete no-print" onclick="deleteSection('${sectionId}')" title="Eliminar Sección">✖</button>
+        `;
+
+            // Contenedor de tareas
+            const taskGroup = document.createElement('div');
+            taskGroup.className = 'checklist-group';
+            taskGroup.id = 'task-group-' + sectionId;
+
+            tasks.forEach((task, taskIndex) => {
+                taskGroup.appendChild(createTaskElement(task, sectionId, taskIndex));
+            });
+
+            // Controles de la sección
+            const controls = document.createElement('div');
+            controls.className = 'no-print-controls no-print';
+            controls.innerHTML = `<button class="btn-small" onclick="addTask('${sectionId}')">+ Añadir Tarea</button>`;
+
+            sectionDiv.appendChild(header);
+            sectionDiv.appendChild(taskGroup);
+            sectionDiv.appendChild(controls);
+
+            return sectionDiv;
+        }
+
+        // Crear elemento de tarea (Checkbox + Texto)
+        function createTaskElement(text, sectionId, taskIndex) {
+            const item = document.createElement('div');
+            item.className = 'check-item';
+            const uniqueId = `check-${sectionId}-${taskIndex}-${Date.now()}`;
+
+            item.innerHTML = `
+            <input type="checkbox" id="${uniqueId}">
+            <div class="check-text" contenteditable="true" placeholder="Escribe la tarea aquí...">${text}</div>
+            <button class="btn-delete no-print" onclick="this.parentElement.remove()" title="Eliminar Tarea">✖</button>
+        `;
+            return item;
+        }
+
+        // Funciones dinámicas
+        function addSection() {
+            const sectionId = 'new-' + Date.now();
+            const newSection = createSectionElement("Nueva Sección (Clic para editar)", ["Nueva tarea..."], sectionId);
+            wrapper.appendChild(newSection);
+        }
+
+        function deleteSection(sectionId) {
+            if (confirm("¿Estás seguro de eliminar esta sección completa?")) {
+                document.getElementById('section-' + sectionId).remove();
+            }
+        }
+
+        function addTask(sectionId) {
+            const taskGroup = document.getElementById('task-group-' + sectionId);
+            const newTask = createTaskElement("Nueva tarea...", sectionId, Date.now());
+            taskGroup.appendChild(newTask);
+        }
+
+        // Iniciar renderizado
+        renderChecklist();
+
+        function guardarBorrador() {
+            // Sync inputs to attributes
+            document.querySelectorAll('input').forEach(el => {
+                if (el.type === 'checkbox' || el.type === 'radio') {
+                    if (el.checked) el.setAttribute('checked', 'checked');
+                    else el.removeAttribute('checked');
+                } else {
+                    el.setAttribute('value', el.value);
+                }
+            });
+            // Sync textareas to textContent
+            document.querySelectorAll('textarea').forEach(el => {
+                el.textContent = el.value;
+            });
+
+            const data = {
+                infoGrid: document.querySelector('.info-grid').innerHTML,
+                sections: document.getElementById('sections-wrapper').innerHTML,
+                remanente: document.getElementById('material-remanente').value,
+                notas: document.getElementById('notas').value
+            };
+
+            const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'ecolunaserv_checklist_borrador.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        function cargarBorrador() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = e => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = event => {
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        if (data.infoGrid) document.querySelector('.info-grid').innerHTML = data.infoGrid;
+                        if (data.sections) document.getElementById('sections-wrapper').innerHTML = data.sections;
+                        if (data.remanente !== undefined) document.getElementById('material-remanente').value = data.remanente;
+                        if (data.notas !== undefined) document.getElementById('notas').value = data.notas;
+                    } catch (err) {
+                        alert("Error al cargar el borrador.");
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+    </script>
+
+</body>
+
+</html>

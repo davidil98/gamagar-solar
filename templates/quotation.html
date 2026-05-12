@@ -353,6 +353,10 @@
 <body>
     <div class="no-print">
         <button class="btn-print" onclick="window.print()">🖨️ Generar PDF / Imprimir</button>
+        <button class="btn-print" style="background-color: #0288d1; margin-left: 10px;" onclick="guardarBorrador()">💾
+            Guardar Borrador</button>
+        <button class="btn-print" style="background-color: #f57c00; margin-left: 10px;" onclick="cargarBorrador()">📂
+            Cargar Borrador</button>
         <p style="color: #666; font-size: 0.9em; margin-top: 10px;">Llena los campos y haz clic en el botón para
             imprimir o guardar como PDF. Los campos vacíos tendrán una línea para llenado manual en el impreso. Los
             recuadros de texto se adaptan al contenido automáticamente.</p>
@@ -888,6 +892,70 @@
                     rows[rows.length - 1].remove();
                     updatePanelNumbers();
                 }
+            }
+
+            function guardarBorrador() {
+                // Sync all inputs to attributes so innerHTML captures them
+                document.querySelectorAll('input').forEach(el => {
+                    if (el.type === 'checkbox' || el.type === 'radio') {
+                        if (el.checked) el.setAttribute('checked', 'checked');
+                        else el.removeAttribute('checked');
+                    } else {
+                        el.setAttribute('value', el.value);
+                    }
+                });
+
+                const data = {
+                    clientInfo: document.querySelector('.client-info').innerHTML,
+                    inversion: document.getElementById('table-inversion').innerHTML,
+                    pagos: document.getElementById('table-pagos').innerHTML,
+                    escala: document.getElementById('table-escala').innerHTML,
+                    diagram: document.querySelector('.diagram-container').innerHTML,
+                    roi: document.getElementById('roi-container').innerHTML
+                };
+
+                const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'ecolunaserv_cotizacion_borrador.json';
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+
+            function cargarBorrador() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.json';
+                input.onchange = e => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = event => {
+                        try {
+                            const data = JSON.parse(event.target.result);
+                            if (data.clientInfo) document.querySelector('.client-info').innerHTML = data.clientInfo;
+                            if (data.inversion) document.getElementById('table-inversion').innerHTML = data.inversion;
+                            if (data.pagos) document.getElementById('table-pagos').innerHTML = data.pagos;
+                            if (data.escala) document.getElementById('table-escala').innerHTML = data.escala;
+                            if (data.diagram) document.querySelector('.diagram-container').innerHTML = data.diagram;
+                            if (data.roi) document.getElementById('roi-container').innerHTML = data.roi;
+
+                            // Re-bind logic where necessary
+                            document.querySelectorAll('.roi-block').forEach(block => calcularEmpirico(block.querySelector('.emp-gasto-actual')));
+                            const autoSumCheckbox = document.getElementById('auto-sum-inversion');
+                            if (autoSumCheckbox) {
+                                // Reattach event listener which gets lost with innerHTML replace
+                                autoSumCheckbox.addEventListener('change', updateAutoSum);
+                                updateAutoSum();
+                            }
+                        } catch (err) {
+                            alert("Error al cargar el borrador.");
+                        }
+                    };
+                    reader.readAsText(file);
+                };
+                input.click();
             }
         </script>
 </body>

@@ -27,5 +27,10 @@ def cotizacion():
     content = load_content()
     return render_template('quotation.html', content=content)
 
+@app.route('/checklist/')
+def checklist():
+    content = load_content()
+    return render_template('checklist.html', content=content)
+
 if __name__ == '__main__':
     app.run(debug=True)
