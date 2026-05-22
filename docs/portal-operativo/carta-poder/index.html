@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Carta Poder - EcoLuna</title>
+    <link rel="icon" type="image/png" href="../../static/images/gamagar_logo.png">
+    <style>
+        @page {
+            size: letter;
+            margin: 25mm;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            color: #000;
+            line-height: 1.5;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 20px;
+            font-size: 11pt;
+        }
+
+        .documento-hoja {
+            background-color: #fff;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px 60px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .fecha-encabezado {
+            text-align: right;
+            margin-bottom: 40px;
+        }
+
+        .editable-inline {
+            background-color: #fffde7;
+            border-bottom: 1px dashed #f57f17;
+            padding: 0 4px;
+            outline: none;
+            display: inline-block;
+        }
+
+        .editable-inline:focus {
+            background-color: #fff9c4;
+            border-bottom: 1px solid #e65100;
+        }
+
+        .destinatario {
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+
+        .firmas-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            margin-top: 70px;
+            page-break-inside: avoid;
+        }
+
+        .eje-firma {
+            text-align: center;
+        }
+
+        .linea {
+            border-top: 1px solid #000;
+            width: 80%;
+            margin: 40px auto 5px;
+        }
+
+        .btn-print {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 11pt;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 20px auto 0;
+        }
+
+        @media print {
+            body {
+                background-color: #fff;
+                padding: 0;
+            }
+
+            .documento-hoja {
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .editable-inline {
+                background: none;
+                border-bottom: none;
+                padding: 0;
+            }
+
+            .btn-print {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="documento-hoja">
+
+        <div class="fecha-encabezado">
+            En <div class="editable-inline" contenteditable="true">[Ciudad], Nuevo León</div>, a
+            <div class="editable-inline" contenteditable="true">[día] de [mes] del [año]</div>
+        </div>
+
+        <div class="destinatario">
+            <strong>Asunto: Carta Poder</strong><br><br>
+            <strong>COMISIÓN FEDERAL DE ELECTRICIDAD</strong><br>
+            <strong>PRESENTE.</strong>
+        </div>
+
+        <p>Por medio de la presente, otorgo al <strong>C. <span class="editable-inline" contenteditable="true">[Nombre
+                    del apoderado]</span></strong>, poder amplio, cumplido y bastante, de conformidad con lo establecido
+            en el artículo 2554 párrafo segundo del Código Civil Federal, para que a mi nombre y en mi representación
+            como <strong>C. <span class="editable-inline" contenteditable="true">[Nombre del
+                    poderdante]</span></strong>, gestione los trámites administrativos necesarios y los demás que se
+            deriven de los mismos, específicamente para el trámite de Interconexión del Sistema Eléctrico Nacional con
+            la Interconexión Eléctrica del solicitante mediante la instalación de paneles solares en mi <span
+                class="editable-inline" contenteditable="true">domicilio
+                particular</span> ubicado en: <span class="editable-inline" contenteditable="true">[Dirección del
+                poderdante]</span></p>
+
+        <p>Poder que se otorga con todas las facultades necesarias, utilizándolo también para oír y recibir toda clase
+            de notificaciones y documentos, mismas que se han conferido de manera enunciativa, para el trámite señalado
+            en el párrafo anterior.</p>
+
+        <div class="firmas-layout">
+            <div class="eje-firma">
+                <div class="linea"></div>
+                <strong>Otorgo el Poder</strong><br>
+                <div class="editable-inline" contenteditable="true">[Nombre del poderdante]</div>
+            </div>
+            <div class="eje-firma">
+                <div class="linea"></div>
+                <strong>Acepto el Poder</strong><br>
+                <div class="editable-inline" contenteditable="true">[Nombre del apoderado]</div>
+            </div>
+        </div>
+
+        <div class="firmas-layout" style="margin-top: 40px;">
+            <div class="eje-firma">
+                <div class="linea"></div>
+                <strong>Testigo</strong><br>
+                <div class="editable-inline" contenteditable="true">[Nombre Testigo 1]</div>
+            </div>
+            <div class="eje-firma">
+                <div class="linea"></div>
+                <strong>Testigo</strong><br>
+                <div class="editable-inline" contenteditable="true">[Nombre Testigo 2]</div>
+            </div>
+        </div>
+
+        <div class="no-print-controls" style="margin-top:20px; text-align:center; display: flex; align-items: center;">
+            <button class="btn-print" onclick="guardarBorradorCarta()" style="background-color:#0288d1;">💾 Guardar
+                Borrador</button>
+            <button class="btn-print" onclick="cargarBorradorCarta()"
+                style="margin-top:20px; background-color:#f57c00;">📂 Cargar Borrador</button>
+        </div>
+        <button class="btn-print" onclick="window.print()">🖨️ Imprimir Carta Poder</button>
+        <script>
+            // Guardar borrador de la carta poder
+            function guardarBorradorCarta() {
+                // Sync editable spans
+                document.querySelectorAll('.editable-inline').forEach(el => {
+                    if (el.innerText) {
+                        el.setAttribute('data-content', el.innerText);
+                    }
+                });
+                const data = {
+                    html: document.querySelector('.documento-hoja').innerHTML
+                };
+                const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'carta_poder_borrador.json';
+                a.click();
+                URL.revokeObjectURL(url);
+            }
+
+            // Cargar borrador de la carta poder
+            function cargarBorradorCarta() {
+                const input = document.createElement('input');
+                input.type = 'file';
+                input.accept = '.json';
+                input.onchange = e => {
+                    const file = e.target.files[0];
+                    if (!file) return;
+                    const reader = new FileReader();
+                    reader.onload = ev => {
+                        try {
+                            const data = JSON.parse(ev.target.result);
+                            if (data.html) {
+                                document.querySelector('.documento-hoja').innerHTML = data.html;
+                            }
+                        } catch (err) {
+                            alert('Error al cargar el borrador.');
+                        }
+                    };
+                    reader.readAsText(file);
+                };
+                input.click();
+            }
+        </script>
+    </div>
+
+</body>
+
+</html>

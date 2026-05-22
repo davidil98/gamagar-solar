@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Contrato Modular - EcoLuna</title>
+    <link rel="icon" type="image/png" href="../../static/images/gamagar_logo.png">
+    <style>
+        @page {
+            size: letter;
+            margin: 25mm;
+        }
+
+        body {
+            font-family: 'Times New Roman', Times, serif;
+            color: #000;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+            padding: 20px;
+            font-size: 12pt;
+        }
+
+        .container {
+            background-color: #fff;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 50px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Controles de la App */
+        .panel-control {
+            background-color: #e8f5e9;
+            border: 1px solid #c8e6c9;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 30px;
+        }
+
+        .panel-control h3 {
+            margin-top: 0;
+            color: #2e7d32;
+        }
+
+        .opciones-clausulas {
+            margin-top: 15px;
+            border-top: 1px dashed #c8e6c9;
+            padding-top: 15px;
+        }
+
+        /* Estilos del Contrato Legal */
+        h1 {
+            text-align: center;
+            font-size: 14pt;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        p {
+            text-align: justify;
+            margin-bottom: 15px;
+            outline: none;
+            padding: 2px;
+        }
+
+        p:focus {
+            background-color: #fffde7;
+            border-radius: 3px;
+        }
+
+        /* Cláusulas dinámicas */
+        .clausula-opcional {
+            display: none;
+        }
+
+        .clausula-opcional.activa {
+            display: block;
+        }
+
+        .btn-action {
+            background-color: #2e7d32;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+
+        .btn-print {
+            background-color: #1976d2;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 12pt;
+            border-radius: 4px;
+            cursor: pointer;
+            display: block;
+            margin: 30px auto 0;
+        }
+
+        @media print {
+            body {
+                background-color: #fff;
+                padding: 0;
+            }
+
+            .container {
+                box-shadow: none;
+                padding: 0;
+                max-width: 100%;
+            }
+
+            .panel-control,
+            .btn-print,
+            .btn-action {
+                display: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="panel-control">
+            <h3>Estructura del Contrato</h3>
+            <p style="font-size: 10pt; color: #666; margin-bottom: 10px;">💡 Todo el texto del contrato abajo es
+                editable. Solo haz clic y escribe o borra directamente.</p>
+
+            <button class="btn-action" onclick="guardarBorradorContrato()"
+                style="background-color: #0288d1; margin-left: 10px;">💾 Guardar Borrador</button>
+            <button class="btn-action" onclick="cargarBorradorContrato()"
+                style="background-color: #f57c00; margin-left: 10px;">📂 Cargar Borrador</button>
+
+            <a href="https://docs.google.com/document/d/1Fw4DJS-xeZX6NOwmu3W2F7PgW3rk0gDXA1yCLf15nG8/copy"
+                target="_blank" class="btn-action" style="text-decoration: none; display: inline-block;">📝 Editar en
+                Google Docs</a>
+
+            <div class="opciones-clausulas">
+                <strong>Módulos Especiales:</strong><br>
+                <label><input type="checkbox" id="chk-imper" onchange="toggleModulo('clausula-imper', this)"> Incluir
+                    Cláusula de Impermeabilización</label><br>
+                <label><input type="checkbox" id="chk-finan" onchange="toggleModulo('clausula-finan', this)"> Incluir
+                    Cláusula de Financiamiento (MSI)</label>
+            </div>
+        </div>
+
+        <h1>CONTRATO DE SUMINISTRO E INSTALACIÓN</h1>
+
+        <div id="cuerpo-contrato">
+            <p contenteditable="true">CONTRATO DE SUMINISTRO E INSTALACIÓN DE EQUIPO QUE CELEBRAN POR UNA PARTE
+                <strong><span class="editable-inline" contenteditable="true">[NOMBRE DE LA EMPRESA]</span></strong>,
+                REPRESENTADA EN
+                ESTE ACTO POR <strong><span class="editable-inline" contenteditable="true">[NOMBRE DEL
+                        REPRESENTANTE]</span></strong>, A QUIEN EN LO SUCESIVO SE LE DENOMINARÁ "EL PROVEEDOR", Y POR LA
+                OTRA
+                PARTE <strong><span class="editable-inline" contenteditable="true">[NOMBRE DEL
+                        CLIENTE/EMPRESA]</span></strong>, REPRESENTADA POR <strong><span class="editable-inline"
+                        contenteditable="true">[NOMBRE DEL REPRESENTANTE DEL CLIENTE]</span></strong>, A QUIEN EN LO
+                SUCESIVO SE LE DENOMINARÁ "EL CLIENTE", AL TENOR DE LAS SIGUIENTES DECLARACIONES Y CLÁUSULAS:
+            </p>
+
+            <h2 contenteditable="true" style="text-align: center; font-size: 12pt; text-transform: uppercase;">
+                DECLARACIONES</h2>
+
+            <h3 contenteditable="true" style="font-size: 12pt;">I. Declara "EL PROVEEDOR":</h3>
+            <ol contenteditable="true" style="list-style-type: upper-roman;">
+                <li>Ser una empresa dedicada al suministro e instalación de sistemas de energía renovable y cuenta con
+                    la capacidad técnica, material y humana para llevar a cabo el objeto de este contrato.</li>
+                <li>Contar con su Registro Federal de Contribuyentes de calidad de persona física con actividad
+                    empresarial bajo el nombre de <strong><span class="editable-inline" contenteditable="true">[NOMBRE
+                            DEL REPRESENTANTE DE LA EMPRESA]</span></strong> y encontrarse al corriente de sus
+                    obligaciones fiscales.</li>
+                <li>Tener como domicilio legal el ubicado en: <span class="editable-inline"
+                        contenteditable="true">[Domicilio de EcoLuna]</span>.</li>
+            </ol>
+
+            <h3 contenteditable="true" style="font-size: 12pt;">II. Declara "EL CLIENTE":</h3>
+            <ol contenteditable="true" style="list-style-type: upper-roman;">
+                <li>Requerir los servicios de suministro e instalación descritos en el presente instrumento.</li>
+                <li>Contar con los recursos económicos suficientes para hacer frente a las obligaciones de pago
+                    derivadas de este contrato.</li>
+                <li>Ser el legítimo propietario del inmueble donde se realizará la instalación, o en su defecto, contar
+                    con la autorización legal, expresa y por escrito del propietario. Asimismo, manifiesta que los datos
+                    del servicio de energía eléctrica coinciden con el recibo de la Comisión Federal de Electricidad
+                    (CFE) que entrega para los trámites correspondientes, asumiendo total responsabilidad legal ante
+                    cualquier irregularidad, oposición de terceros o adeudos previos.</li>
+                <li>Señalar como domicilio legal el ubicado en: <span class="editable-inline"
+                        contenteditable="true">[Domicilio del Cliente]</span>.</li>
+            </ol>
+
+            <h2 contenteditable="true" style="text-align: center; font-size: 12pt; text-transform: uppercase;">CLÁUSULAS
+            </h2>
+
+            <p contenteditable="true"><strong>PRIMERA. OBJETO DEL CONTRATO.</strong> "EL PROVEEDOR" se obliga a
+                suministrar e instalar a favor de "EL CLIENTE" los equipos y materiales descritos en el Anexo Técnico de
+                este contrato (en adelante "El Sistema").</p>
+
+            <p contenteditable="true"><strong>SEGUNDA. IMPORTE.</strong> "EL CLIENTE" pagará a "EL PROVEEDOR" por los
+                materiales y la instalación la cantidad de <strong>$<span class="editable-inline"
+                        contenteditable="true">00,000.00</span> (<span class="editable-inline"
+                        contenteditable="true">[Monto en letra]</span> Pesos 00/100 M.N.)</strong>.</p>
+
+            <div contenteditable="true"><strong>TERCERA. FORMA DE PAGO.</strong> El importe señalado en la cláusula
+                anterior será cubierto de la siguiente manera:
+                <ul>
+                    <li>Un anticipo del <span class="editable-inline" contenteditable="true">[Porcentaje]</span>% a la
+                        firma del presente contrato.</li>
+                    <li>Un pago del <span class="editable-inline" contenteditable="true">[Porcentaje]</span>% al momento
+                        de la entrega de los materiales en el domicilio de "EL CLIENTE".</li>
+                    <li>El <span class="editable-inline" contenteditable="true">[Porcentaje]</span>% restante a la
+                        entrega y puesta en marcha del Sistema a entera satisfacción de "EL CLIENTE".</li>
+                </ul>
+            </div>
+
+            <p contenteditable="true"><strong>CUARTA. PLAZOS DE ENTREGA.</strong> "EL PROVEEDOR" se compromete a iniciar
+                la instalación en un plazo no mayor a <span class="editable-inline"
+                    contenteditable="true">[Número]</span> días hábiles posteriores a la recepción del anticipo.</p>
+
+            <p contenteditable="true"><strong>QUINTA. GARANTÍAS.</strong> "EL PROVEEDOR" otorga una garantía de <span
+                    class="editable-inline" contenteditable="true">[Número]</span> meses sobre defectos de instalación.
+                Las garantías de los equipos suministrados estarán sujetas a las pólizas de los fabricantes
+                correspondientes.</p>
+
+            <p contenteditable="true"><strong>SEXTA. TRÁMITES Y REGULARIDAD ANTE CFE.</strong> "EL CLIENTE" confirma que
+                su servicio eléctrico actual se encuentra al corriente en pagos y sin irregularidades. Dado que los
+                tiempos de la Comisión Federal de Electricidad (CFE) son independientes a "EL PROVEEDOR", si el trámite
+                de interconexión o el cambio de medidor sufre algún retraso o rechazo debido a anomalías previas en el
+                domicilio (tales como adeudos, multas o fallas en la acometida), el trabajo de instalación física se
+                considerará como entregado y se procederá con la liquidación del saldo final acordado, sin que este
+                quede condicionado a la resolución de CFE.</p>
+
+            <p contenteditable="true"><strong>SÉPTIMA. RELACIÓN LABORAL.</strong> Las partes convienen en que "EL
+                PROVEEDOR" es el único responsable de las obligaciones laborales, fiscales y de seguridad social del
+                personal que emplee para la instalación, liberando a "EL CLIENTE" de cualquier responsabilidad al
+                respecto.</p>
+
+            <p contenteditable="true"><strong>OCTAVA. RECEPCIÓN Y RESGUARDO DE MATERIALES.</strong> En caso de
+                requerirse el almacenamiento temporal de los equipos (paneles, inversores, estructuras y cableado) en el
+                domicilio de "EL CLIENTE", este se compromete a designar un espacio seguro para su resguardo. La
+                protección de dichos materiales frente a extravíos, robos o daños ocasionados por terceros quedará bajo
+                la responsabilidad económica de "EL CLIENTE" mientras se encuentren almacenados. Por su parte, "EL
+                PROVEEDOR" asume la total responsabilidad económica por cualquier daño que sufran los equipos derivado
+                de su manipulación, maniobras o mala praxis durante la ejecución de los trabajos de instalación.</p>
+
+            <p contenteditable="true"><strong>NOVENA. CONDICIONES DE CANCELACIÓN.</strong> "EL PROVEEDOR" entiende que
+                pueden surgir imprevistos. Sin embargo, debido a que la firma de este contrato detona la compra
+                inmediata de equipos y la asignación de personal, si "EL CLIENTE" requiere cancelar el proyecto de
+                manera unilateral después de haber realizado el pago del anticipo, se aplicará una retención del 20%
+                (veinte por ciento) sobre el valor total del proyecto. Este monto tiene la única finalidad de cubrir los
+                gastos administrativos, de logística y los cargos por devolución que exigen los fabricantes,
+                comprometiéndose "EL PROVEEDOR" a reembolsar el saldo restante del anticipo a la brevedad.</p>
+
+            <p contenteditable="true" id="clausula-imper" class="clausula-opcional"><strong>DÉCIMA (OPCIONAL). TRABAJOS
+                    DE IMPERMEABILIZACIÓN.</strong> Como parte de los servicios integrales de preparación de la
+                superficie, "EL PROVEEDOR" ejecutará la aplicación de impermeabilizante de alta resistencia en la zona
+                de anclaje de las estructuras Atlas antes de la fijación de los módulos.</p>
+
+            <p contenteditable="true" id="clausula-finan" class="clausula-opcional"><strong>DÉCIMA PRIMERA (OPCIONAL).
+                    CONDICIONES DE FINANCIAMIENTO.</strong> "EL CLIENTE" optará por liquidar el proyecto mediante el
+                esquema de meses sin intereses procesado a través de la plataforma externa de Mercado Pago, aceptando
+                las comisiones comerciales correspondientes.</p>
+
+            <p contenteditable="true" style="margin-top: 40px;">Leído que fue el presente contrato y enteradas las
+                partes de su contenido y alcance legal, lo firman por duplicado en <span class="editable-inline"
+                    contenteditable="true">Apodaca, Nuevo León</span>, el día <span class="editable-inline"
+                    contenteditable="true">[Día] de [Mes] de 2026</span>.</p>
+
+            <div style="display: flex; justify-content: space-around; margin-top: 60px; text-align: center;">
+                <div>
+                    <div style="border-top: 1px solid #000; width: 200px; margin: 0 auto 10px;"></div>
+                    <strong>"EL PROVEEDOR"</strong><br>
+                    <span class="editable-inline" contenteditable="true">[NOMBRE DEL REPRESENTANTE DE LA EMPRESA]</span>
+                </div>
+                <div>
+                    <div style="border-top: 1px solid #000; width: 200px; margin: 0 auto 10px;"></div>
+                    <strong>"EL CLIENTE"</strong><br>
+                    <span class="editable-inline" contenteditable="true">[NOMBRE DEL REPRESENTANTE DEL CLIENTE]</span>
+                </div>
+            </div>
+        </div>
+
+        <button class="btn-print" onclick="window.print()">🖨️ Imprimir / Guardar PDF Comercial</button>
+    </div>
+
+    <script>
+        // Activa o desactiva los bloques preestablecidos
+        function toggleModulo(idElemento, checkbox) {
+            const elemento = document.getElementById(idElemento);
+            if (checkbox.checked) {
+                elemento.classList.add('activa');
+            } else {
+                elemento.classList.remove('activa');
+            }
+        }
+
+        // Inyecta un nuevo párrafo completamente editable y limpio
+        function agregarClausula() {
+            const cuerpo = document.getElementById('cuerpo-contrato');
+            const nuevoParrafo = document.createElement('p');
+            nuevoParrafo.setAttribute('contenteditable', 'true');
+            nuevoParrafo.innerHTML = "<strong>NUEVA CLÁUSULA.</strong> Escribe aquí los acuerdos específicos o modificaciones para este cliente...";
+            cuerpo.appendChild(nuevoParrafo);
+            nuevoParrafo.focus();
+        }
+        // Guardar borrador del contrato
+        function guardarBorradorContrato() {
+            // Sync checkbox states
+            document.querySelectorAll('input[type="checkbox"]').forEach(el => {
+                if (el.checked) el.setAttribute('checked', 'checked');
+                else el.removeAttribute('checked');
+            });
+            const data = {
+                cuerpo: document.getElementById('cuerpo-contrato').innerHTML,
+                chkImper: document.getElementById('chk-imper')?.checked || false,
+                chkFinan: document.getElementById('chk-finan')?.checked || false
+            };
+            const blob = new Blob([JSON.stringify(data)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'contrato_borrador.json';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        // Cargar borrador del contrato
+        function cargarBorradorContrato() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = e => {
+                const file = e.target.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                reader.onload = event => {
+                    try {
+                        const data = JSON.parse(event.target.result);
+                        if (data.cuerpo) document.getElementById('cuerpo-contrato').innerHTML = data.cuerpo;
+                        if (typeof data.chkImper === 'boolean') {
+                            document.getElementById('chk-imper').checked = data.chkImper;
+                            toggleModulo('clausula-imper', document.getElementById('chk-imper'));
+                        }
+                        if (typeof data.chkFinan === 'boolean') {
+                            document.getElementById('chk-finan').checked = data.chkFinan;
+                            toggleModulo('clausula-finan', document.getElementById('chk-finan'));
+                        }
+                    } catch (err) {
+                        alert('Error al cargar el borrador.');
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+    </script>
+</body>
+
+</html>

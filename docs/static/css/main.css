@@ -2317,6 +2317,13 @@ input[type="radio"]+label:before {
 	width: 100%;
 }
 
+.image-profile {
+	width: 200px;
+	height: 200px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
 /* List */
 
 ol {
