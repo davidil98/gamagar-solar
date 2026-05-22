@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-width=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Portal Operativo - GamaGar Solar</title>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/gamagar_logo.png') }}">
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            background-color: #f4f7f6;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            margin-top: 20px;
+        }
+
+        .header h1 {
+            color: #e76c0f;
+            margin: 0;
+            font-size: 28px;
+        }
+
+        .header p {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            width: 100%;
+            max-width: 900px;
+        }
+
+        .card-btn {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 40px 20px;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .card-btn:hover,
+        .card-btn:active {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(46, 125, 50, 0.15);
+            border-color: #e76c0f;
+        }
+
+        .icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+
+        .card-desc {
+            font-size: 14px;
+            color: #777;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <h1>GamaGar Solar Operaciones</h1>
+        <p>Selecciona una herramienta para comenzar</p>
+    </div>
+
+    <div class="grid-container">
+        <a href="{{ url_for('quotation') }}" class="card-btn">
+            <div class="icon">📊</div>
+            <div class="card-title">Cotizador Dinámico</div>
+            <div class="card-desc">Cálculo de ROI y propuestas comerciales</div>
+        </a>
+
+        <a href="{{ url_for('checklist') }}" class="card-btn">
+            <div class="icon">✅</div>
+            <div class="card-title">Checklist Instalación</div>
+            <div class="card-desc">Verificación de material y seguridad en campo</div>
+        </a>
+
+        <a href="{{ url_for('contract') }}" class="card-btn">
+            <div class="icon">📝</div>
+            <div class="card-title">Contrato de Suministro</div>
+            <div class="card-desc">Generador modular de contratos legales</div>
+        </a>
+
+        <a href="{{ url_for('carta_poder') }}" class="card-btn">
+            <div class="icon">⚖️</div>
+            <div class="card-title">Carta Poder CFE</div>
+            <div class="card-desc">Formato para interconexión y trámites</div>
+        </a>
+    </div>
+
+</body>
+
+</html>

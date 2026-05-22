@@ -22,15 +22,30 @@ def calculadora():
     content = load_content()
     return render_template('calculator.html', content=content)
 
-@app.route('/cotizacion/')
-def cotizacion():
+@app.route('/portal-operativo/')
+def portal_operativo():
+    content = load_content()
+    return render_template('dashboard_op.html', content=content)
+
+@app.route('/portal-operativo/cotizacion/')
+def quotation():
     content = load_content()
     return render_template('quotation.html', content=content)
 
-@app.route('/checklist/')
+@app.route('/portal-operativo/checklist/')
 def checklist():
     content = load_content()
     return render_template('checklist.html', content=content)
+
+@app.route('/portal-operativo/carta-poder/')
+def carta_poder():
+    content = load_content()
+    return render_template('carta_poder.html', content=content)
+
+@app.route('/portal-operativo/contrato/')
+def contract():
+    content = load_content()
+    return render_template('contract.html', content=content)
 
 if __name__ == '__main__':
     app.run(debug=True)
